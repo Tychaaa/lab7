@@ -4,11 +4,7 @@
 #define MAX_ORDER 10
 
 #include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <string>
-#include <conio.h>
 #include <Windows.h>
 
 #include "VinylRecord.h"
