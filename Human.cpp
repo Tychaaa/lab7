@@ -1,5 +1,14 @@
 #include "Human.h"
 
+// Конструктор без параметров
+Human::Human() : firstName(""), lastName("") {}
+
+// Контруктор с параметрами
+Human::Human(string first, string last) : firstName(first), lastName(last) {}
+
+// Деструктор
+Human::~Human() {}
+
 // Определение метода для установки имени человека
 void Human::setFirstName(string firstName)
 {

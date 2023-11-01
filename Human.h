@@ -13,11 +13,11 @@ private:
 public:
 
     // Конструктор без параметров
-    Human() : firstName(""), lastName("") {}
+    Human();
     // Контруктор с параметрами
-    Human(string first, string last) : firstName(first), lastName(last) {}
+    Human(string first, string last);
     // Деструктор
-    ~Human() {}
+    ~Human();
 
     // Сеттеры для класса
     void setFirstName(string firstName);

@@ -9,6 +9,8 @@
 
 #include "VinylRecord.h"
 #include "Human.h"
+#include "Customer.h"
+#include "Employee.h"
 
 using namespace std;
 
