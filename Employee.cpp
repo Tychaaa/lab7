@@ -66,22 +66,3 @@ const float Employee::getSalary()
 {
     return salary;
 }
-
-// ‘ункци€ дл€ ввода информации о сотруднике магазина
-void inputEmployee(string* firstName, string* lastName, string* position, float* salary) {
-
-    cout << "¬ведите им€ сотрудника: ";
-    cin >> *firstName;
-
-    cout << "¬ведите фамилию сотрудника: ";
-    cin >> *lastName;
-
-    cout << "¬ведите должность сотрудника: ";
-    cin.ignore();
-    getline(cin, *position);
-
-    cout << "¬ведите зарплату сотрудника: ";
-    cin >> *salary;
-
-    cout << endl;
-}

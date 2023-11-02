@@ -43,4 +43,3 @@ public:
     const float getPrice();
     const int getQuantity();
 };
-

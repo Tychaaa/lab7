@@ -8,6 +8,9 @@
 #include <iostream>
 using namespace std;
 
+// Глобальные переменные для подсчета заказов
+extern int numOrders;
+
 // Класс для объекта "Заказ"
 class Order {
 private:

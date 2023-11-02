@@ -93,30 +93,3 @@ const int VinylRecord::getQuantity()
 {
     return quantity;
 }
-
-// ‘ункци€ дл€ ввода информации о виниловой пластинке
-void inputVinylRecord(string* album, string* artist, int* year, string* genre, float* price, int* quantity)
-{
-    cin.ignore();
-
-    cout << "¬ведите название альбома: ";
-    getline(cin, *album);
-
-    cout << "¬ведите исполнител€: ";
-    getline(cin, *artist);
-
-    cout << "¬ведите год выпуска: ";
-    cin >> *year;
-    cin.ignore();
-
-    cout << "¬ведите жанр: ";
-    getline(cin, *genre);
-
-    cout << "¬ведите цену: ";
-    cin >> *price;
-
-    cout << "¬ведите количество в наличии: ";
-    cin >> *quantity;
-
-    cout << endl;
-}

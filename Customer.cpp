@@ -63,22 +63,3 @@ const string Customer::getAddress()
 {
     return address;
 }
-
-// ‘ункци€ дл€ ввода информации о клиенте
-void inputCustomer(string* firstName, string* lastName, float* money, string* address)
-{
-    cout << "¬ведите им€ клиента: ";
-    cin >> *firstName;
-
-    cout << "¬ведите фамилию клиента: ";
-    cin >> *lastName;
-
-    cout << "¬ведите количества денег клиента: ";
-    cin >> *money;
-
-    cout << "¬ведите адрес доставки клиента: ";
-    cin.ignore(); // ќчищаем буфер дл€ считывани€ строки
-    getline(cin, *address);
-
-    cout << endl;
-}

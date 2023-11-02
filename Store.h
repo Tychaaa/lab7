@@ -10,7 +10,7 @@
 using namespace std;
 
 // Глобальные переменные для подсчета количества пластинок и сотрудников
-int numRecords, numEmployees;
+extern int numRecords, numEmployees;
 
 // Класс для объекта "Магазин"
 class Store {
