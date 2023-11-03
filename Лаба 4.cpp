@@ -2,6 +2,7 @@
 #define MAX_RECORDS 10
 #define MAX_EMPLOYEE 20
 #define MAX_ORDER 10
+#define ESCAPE 27
 
 #include <iostream>
 #include <string>
@@ -70,16 +71,22 @@ int main()
             do {
                 system("cls");
                 vinylStore.outputStore();
-                cout << "\nЧтобы закончить просмотр нажмите 'Esc'" << endl;
-            }while (_getch() != 27);
+                cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
+            } while (_getch() != ESCAPE);
             break;
         case 3:
-            cout << "действие 3" << endl;
-            Sleep(1000);
+            do {
+                system("cls");
+                vinylStore.outputEmployees();
+                cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
+            } while (_getch() != ESCAPE);
             break;
         case 4:
-            cout << "действие 4" << endl;
-            Sleep(1000);
+            do {
+                system("cls");
+                vinylStore.outputVinylRecords();
+                cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
+            } while (_getch() != ESCAPE);
             break;
         case 5:
             cout << "действие 5" << endl;

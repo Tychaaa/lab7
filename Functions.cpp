@@ -30,7 +30,7 @@ Store inputStore()
         float price;
 
         cout << "Виниловая пластинка #" << i + 1 << endl;
-        inputVinylRecord(&album, &artist, &year, &genre, &price, &quantity);
+        inputVinylRecord(album, artist, year, genre, price, quantity);
 
         // Создание объекта и добавление его в массив
         vinylRecordsArray[i] = VinylRecord(album, artist, year, genre, price, quantity);
@@ -71,28 +71,28 @@ Store inputStore()
 }
 
 // Функция для ввода информации о виниловой пластинке
-void inputVinylRecord(string* album, string* artist, int* year, string* genre, float* price, int* quantity)
+void inputVinylRecord(string& album, string& artist, int& year, string& genre, float& price, int& quantity)
 {
     cin.ignore();
 
     cout << "Введите название альбома: ";
-    getline(cin, *album);
+    getline(cin, album);
 
     cout << "Введите исполнителя: ";
-    getline(cin, *artist);
+    getline(cin, artist);
 
     cout << "Введите год выпуска: ";
-    cin >> *year;
+    cin >> year;
     cin.ignore();
 
     cout << "Введите жанр: ";
-    getline(cin, *genre);
+    getline(cin, genre);
 
     cout << "Введите цену: ";
-    cin >> *price;
+    cin >> price;
 
     cout << "Введите количество в наличии: ";
-    cin >> *quantity;
+    cin >> quantity;
 }
 
 // Функция для ввода информации о клиенте

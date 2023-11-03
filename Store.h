@@ -30,6 +30,11 @@ public:
     // Деструктор
     ~Store();
 
+    void outputEmployees();
+    void outputEmployeesShortList();
+    void outputVinylRecords();
+    void outputVinylRecordsShortList();
+
     // Метод для вывода информации о магазине
     void outputStore();
 
