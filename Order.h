@@ -15,6 +15,7 @@ extern int numOrders;
 class Order {
 private:
 
+    static int orderNumberGenerator;  // Генератор номеров заказов
     int orderNumber;    // Номер заказа
     string orderDate;   // Дата заказа
     Employee employee;  // Сотрудник магазина
@@ -28,15 +29,17 @@ public:
     // Контруктор без параметров
     Order();
     // Контруктор с параметрами
-    Order(int number, string date, Employee emp, Customer cust, VinylRecord record, int quantity, float cost);
+    Order(string date, Employee emp, Customer cust, VinylRecord record, int quantity, float cost);
     // Деструктор
     ~Order();
 
     // Метод для вывода информации о заказе
     void outputOrder();
+
+    // Статический метод для генерации уникального номера заказа
+    static int generateOrderNumber();
     
     // Сеттеры для класса
-    void setOrderNumber(int orderNumber);
     void setOrderDate(string orderDate);
     void setQuantityOrdered(int quantityOrdered);
     void setTotalCost(float totalCost);
@@ -47,4 +50,3 @@ public:
     const int getQuantityOrdered();
     const float getTotalCost();
 };
-

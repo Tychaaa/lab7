@@ -5,8 +5,9 @@
 
 #include <iostream>
 #include <string>
+#include <conio.h>
 #include <Windows.h>
-#include "Functions.h"
+#include "Functions.h" // Заголовочный файл с функциями
 
 // Заголовочные файлы для классов
 #include "VinylRecord.h"
@@ -30,9 +31,9 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);    
 
+    Store vinylStore;
+
     int input;
-    /*Store store;
-    Order order;*/
 
     // Главный цикл программы
     do {
@@ -62,12 +63,15 @@ int main()
 
         switch (input) {
         case 1:
-            cout << "действие 1" << endl;
+            vinylStore = inputStore();
             Sleep(1000);
             break;
         case 2:
-            cout << "действие 2" << endl;
-            Sleep(1000);
+            do {
+                system("cls");
+                vinylStore.outputStore();
+                cout << "\nЧтобы закончить просмотр нажмите 'Esc'" << endl;
+            }while (_getch() != 27);
             break;
         case 3:
             cout << "действие 3" << endl;

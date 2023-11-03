@@ -1,5 +1,75 @@
 #include "Functions.h"
 
+Store inputStore() 
+{
+    cout << "\n\t~~Создание магазина~~" << endl;
+    cout << "-------------------------------------------" << endl;
+
+    string name, address;
+
+    cout << "Введите название магазина: ";
+    getline(cin, name);
+
+    cout << "Введите адрес магазина: ";
+    getline(cin, address);
+
+    cout << "-------------------------------------------" << endl;
+
+    cout << "Введите количество виниловых пластинок: ";
+    cin >> numRecords;
+
+    cout << "-------------------------------------------" << endl;
+
+    // Динамический массив объектов класса VinylRecord
+    VinylRecord* vinylRecordsArray = new VinylRecord[numRecords];
+
+    for (int i = 0; i < numRecords; ++i) {
+        // Ввод данных о виниловой пластинке
+        string album, artist, genre;
+        int year, quantity;
+        float price;
+
+        cout << "Виниловая пластинка #" << i + 1 << endl;
+        inputVinylRecord(&album, &artist, &year, &genre, &price, &quantity);
+
+        // Создание объекта и добавление его в массив
+        vinylRecordsArray[i] = VinylRecord(album, artist, year, genre, price, quantity);
+
+        cout << "-------------------------------------------" << endl;
+    }
+
+    cout << "Введите количество сотрудников магазина: ";
+    cin >> numEmployees;
+
+    cout << "-------------------------------------------" << endl;
+
+    // Динамический массив объектов класса Employee
+    Employee* employeeArray = new Employee[numEmployees];
+
+    for (int i = 0; i < numEmployees; i++) {
+        // Ввод данных о сотруднике
+        string firstName, lastName, position;
+        float salary;
+
+        cout << "Сотрудник #" << i + 1 << ":" << endl;
+        inputEmployee(&firstName, &lastName, &position, &salary);
+
+        // Создание объекта и добавление его в массив
+        employeeArray[i] = Employee(firstName, lastName, position, salary);
+
+        cout << "-------------------------------------------" << endl;
+    }
+
+    // Создаем магазин с использованием конструктора с параметрами и возвращаем его
+    Store store(name, address, vinylRecordsArray, employeeArray);
+
+    delete[] vinylRecordsArray;
+    delete[] employeeArray;
+
+    // Возвращаем созданный объект магазина
+    return store;
+}
+
 // Функция для ввода информации о виниловой пластинке
 void inputVinylRecord(string* album, string* artist, int* year, string* genre, float* price, int* quantity)
 {
@@ -23,8 +93,6 @@ void inputVinylRecord(string* album, string* artist, int* year, string* genre, f
 
     cout << "Введите количество в наличии: ";
     cin >> *quantity;
-
-    cout << endl;
 }
 
 // Функция для ввода информации о клиенте
@@ -62,6 +130,4 @@ void inputEmployee(string* firstName, string* lastName, string* position, float*
 
     cout << "Введите зарплату сотрудника: ";
     cin >> *salary;
-
-    cout << endl;
 }

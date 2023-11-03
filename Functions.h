@@ -1,8 +1,11 @@
 #pragma once
+#include "Store.h"
 
 #include <string>
 #include <iostream>
 using namespace std;
+
+Store inputStore();
 
 // Функция для ввода информации о виниловой пластинке
 void inputVinylRecord(string* album, string* artist, int* year, string* genre, float* price, int* quantity);
