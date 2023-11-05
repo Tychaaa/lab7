@@ -41,8 +41,8 @@ public:
     // Сеттеры для класса
     void setStoreName(string storeName);
     void setStoreAddress(string storeAddress);
-    /*void setVinylRecordsInStore(VinylRecord* vinylRecordsArray);
-    void setEmployeesInStore(Employee* employeeArray);*/
+    void setVinylRecordsInStore(VinylRecord* vinylRecordsArray);
+    void setEmployeesInStore(Employee* employeeArray);
 
     // Геттеры для класса
     const string getStoreName();

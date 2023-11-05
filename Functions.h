@@ -3,9 +3,18 @@
 
 #include <string>
 #include <iostream>
+#include <Windows.h>
 using namespace std;
 
 Store inputStore();
+
+void addVinylRecordsToStore(Store& store);
+
+void addEmployeesToStore(Store& store);
+
+void removeVinylRecord(Store& store);
+
+void removeEmployee(Store& store);
 
 // Функция для ввода информации о виниловой пластинке
 void inputVinylRecord(string& album, string& artist, int& year, string& genre, float& price, int& quantity);

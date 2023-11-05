@@ -22,14 +22,16 @@ void Store::outputEmployees()
 {
     cout << "\n\t~~Информация о сотрудниках магазина \"" << getStoreName() << "\"~~" << endl;
     cout << "---------------------------" << endl;
-    for (int i = 0; i < numEmployees; ++i) {
-        if (employeesInStore[i].getFirstName() != "") {
-            cout << "Сотрудник #" << i + 1 << endl;
-            cout << "Имя: " << employeesInStore[i].getFirstName() << endl;
-            cout << "Фамилия: " << employeesInStore[i].getLastName() << endl;
-            cout << "Должность: " << employeesInStore[i].getPosition() << endl;
-            cout << "Зарплата: " << employeesInStore[i].getSalary() << endl;
+    int employeeNumber = 1;
+    for (auto& employee : employeesInStore) {
+        if (employee.getFirstName() != "") {
+            cout << "Сотрудник #" << employeeNumber << endl;
+            cout << "Имя: " << employee.getFirstName() << endl;
+            cout << "Фамилия: " << employee.getLastName() << endl;
+            cout << "Должность: " << employee.getPosition() << endl;
+            cout << "Зарплата: " << employee.getSalary() << endl;
             cout << "---------------------------" << endl;
+            employeeNumber++;
         }
     }
     cout << endl;
@@ -38,9 +40,11 @@ void Store::outputEmployees()
 void Store::outputEmployeesShortList()
 {
     cout << "Сотрудники магазина:" << endl;
-    for (int i = 0; i < numEmployees; ++i) {
-        if (employeesInStore[i].getFirstName() != "") {
-            cout << i + 1 << ") " << employeesInStore[i].getFirstName() << " " << employeesInStore[i].getLastName() << " - " << employeesInStore[i].getPosition() << endl;
+    int employeeNumber = 1;
+    for (auto& employee : employeesInStore) {
+        if (employee.getFirstName() != "") {
+            cout << employeeNumber << ") " << employee.getFirstName() << " " << employee.getLastName() << " - " << employee.getPosition() << endl;
+            employeeNumber++;
         }
     }
 }
@@ -48,17 +52,19 @@ void Store::outputEmployeesShortList()
 void Store::outputVinylRecords()
 {
     cout << "\n\t~~Информация о виниловых пластинках в магазине \"" << getStoreName() << "\"~~" << endl;
+    int recordNumber = 1; // Счетчик для номера пластинки
     cout << "---------------------------" << endl;
-    for (int i = 0; i < numRecords; ++i) {
-        if (vinylRecordsInStore[i].getAlbumName() != "") {
-            cout << "Виниловая пластинка #" << i + 1 << endl;
-            cout << "Название альбома: " << vinylRecordsInStore[i].getAlbumName() << endl;
-            cout << "Исполнитель: " << vinylRecordsInStore[i].getArtist() << endl;
-            cout << "Год выпуска: " << vinylRecordsInStore[i].getYear() << endl;
-            cout << "Жанр: " << vinylRecordsInStore[i].getGenre() << endl;
-            cout << "Цена: " << vinylRecordsInStore[i].getPrice() << endl;
-            cout << "Количество в наличии: " << vinylRecordsInStore[i].getQuantity() << endl;
+    for (auto& record : vinylRecordsInStore) {
+        if (record.getAlbumName() != "") {
+            cout << "Виниловая пластинка #" << recordNumber << endl;
+            cout << "Название альбома: " << record.getAlbumName() << endl;
+            cout << "Исполнитель: " << record.getArtist() << endl;
+            cout << "Год выпуска: " << record.getYear() << endl;
+            cout << "Жанр: " << record.getGenre() << endl;
+            cout << "Цена: " << record.getPrice() << endl;
+            cout << "Количество в наличии: " << record.getQuantity() << endl;
             cout << "---------------------------" << endl;
+            recordNumber++;
         }
     }
     cout << endl;
@@ -67,9 +73,11 @@ void Store::outputVinylRecords()
 void Store::outputVinylRecordsShortList()
 {
     cout << "Пластинки в наличии:" << endl;
-    for (int i = 0; i < numRecords; ++i) {
-        if (vinylRecordsInStore[i].getAlbumName() != "") {
-            cout << i + 1 << ") " << vinylRecordsInStore[i].getAlbumName() << " - " << vinylRecordsInStore[i].getArtist() << " (" << vinylRecordsInStore[i].getQuantity() << " шт.)" << endl;
+    int recordNumber = 1;
+    for (auto& record : vinylRecordsInStore) {
+        if (record.getAlbumName() != "") {
+            cout << recordNumber << ") " << record.getAlbumName() << " - " << record.getArtist() << " (" << record.getQuantity() << " шт.)" << endl;
+            recordNumber++;
         }
     }
 }
@@ -96,6 +104,22 @@ void Store::setStoreName(string storeName)
 void Store::setStoreAddress(string storeAddress)
 {
     this->storeAddress = storeAddress;
+}
+
+void Store::setVinylRecordsInStore(VinylRecord* vinylRecordsArray)
+{
+    // Перебираем все виниловые пластинки и копируем их в массив магазина
+    for (int i = 0; i < numRecords; ++i) {
+        vinylRecordsInStore[i] = vinylRecordsArray[i];
+    }
+}
+
+void Store::setEmployeesInStore(Employee* employeeArray)
+{
+    // Перебираем всех сотрудников и копируем их в массив магазина
+    for (int i = 0; i < numEmployees; ++i) {
+        employeesInStore[i] = employeeArray[i];
+    }
 }
 
 // Метод для получения названия магазина
