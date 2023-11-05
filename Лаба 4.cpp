@@ -65,10 +65,34 @@ int main()
         cin.ignore(); // Очищаем буфер после ввода числа
 
         switch (input) {
-
+            
         case 1:
             do {
-                vinylStore = inputStore();
+                system("cls");
+                if (!StoreCreated) {
+                    vinylStore = inputStore();
+                    StoreCreated = true;
+                }
+                else {
+                    cout << "\n\t\t~~ПРЕДУПРЕЖДЕНИЕ~~" << endl;
+                    cout << "-------------------------------------------" << endl;
+                    cout << "Магазин уже создан. Хотите создать новый магазин?" << endl;
+                    cout << "Введите ответ (y/n): ";
+                    char response;
+                    cin >> response;
+                    cout << "-------------------------------------------" << endl;
+
+                    if (response == 'y' || response == 'Y') {
+                        system("cls");
+                        vinylStore = inputStore();
+                        // Сбросить флаг создания заказа
+                        OrderCreated = false;
+                    }
+                    else {
+                        cout << "Магазин не будет пересоздан." << endl;
+                        cout << "-------------------------------------------\n" << endl;
+                    }
+                }
                 cout << "\nЧтобы продолжить нажмите 'Esc'" << endl;
             } while (_getch() != ESCAPE);
             break;

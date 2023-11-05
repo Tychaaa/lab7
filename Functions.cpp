@@ -242,6 +242,51 @@ void removeEmployee(Store& store)
     cout << "-------------------------------------------" << endl;
 }
 
+//float calculateDiscount(Order& order) 
+//{
+//    const float DISCOUNT_RATE = 0.1; // Уровень скидки (10%)
+//
+//    float totalCost = order.getTotalCost(); // Получаем общую стоимость заказа с помощью геттера
+//
+//    // Если общая стоимость заказа больше 1000, применяем скидку
+//    if (totalCost > 1000) {
+//        float discount = totalCost * DISCOUNT_RATE;
+//        return discount;
+//    }
+//    else {
+//        // Если общая стоимость заказа не превышает 1000, скидка не применяется
+//        return 0.0;
+//    }
+//}
+
+bool checkAvailability(Order& order, Store& store) {
+    VinylRecord& orderedRecord = order.getOrderedRecord(); // Получаем заказанный альбом из заказа
+    int orderedQuantity = order.getQuantityOrdered(); // Получаем количество заказанных пластинок из заказа
+
+    // Получаем список виниловых пластинок в магазине
+    VinylRecord* vinylRecordsInStore = store.getVinylRecordsInStore();
+
+    // Поиск заказанного альбома в магазине
+    for (int i = 0; i < numRecords; ++i) {
+        if (vinylRecordsInStore[i].getAlbumName() == orderedRecord.getAlbumName() &&
+            vinylRecordsInStore[i].getArtist() == orderedRecord.getArtist()) {
+            // Найден заказанный альбом в магазине
+            // Проверяем, есть ли в наличии достаточное количество заказанных пластинок
+            if (vinylRecordsInStore[i].getQuantity() >= orderedQuantity) {
+                // Достаточное количество заказанных пластинок в наличии
+                return true;
+            }
+            else {
+                // Недостаточное количество заказанных пластинок в наличии
+                return false;
+            }
+        }
+    }
+
+    // Заказанный альбом не найден в магазине
+    return false;
+}
+
 // Функция для ввода информации о виниловой пластинке (пример возврата через ссылку)
 void inputVinylRecord(string& album, string& artist, int& year, string& genre, float& price, int& quantity)
 {

@@ -65,6 +65,11 @@ const string Order::getOrderDate()
     return orderDate;
 }
 
+VinylRecord& Order::getOrderedRecord()
+{
+    return orderedRecord;
+}
+
 // Метод для получения количества заказанных пластинок
 const int Order::getQuantityOrdered()
 {

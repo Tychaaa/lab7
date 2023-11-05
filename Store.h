@@ -30,6 +30,9 @@ public:
     // Деструктор
     ~Store();
 
+    // Дружественная функция для проверки наличия достаточного количества заказанных пластинок в магазине
+    friend bool checkAvailability(Order& order, Store& store);
+
     void outputEmployees();
     void outputEmployeesShortList();
     void outputVinylRecords();

@@ -33,6 +33,9 @@ public:
     // Деструктор
     ~Order();
 
+    // Дружественная функция для проверки наличия достаточного количества заказанных пластинок в магазине
+    friend bool checkAvailability(Order& order, Store& store);
+
     // Метод для вывода информации о заказе
     void outputOrder();
 
@@ -47,6 +50,7 @@ public:
     // Геттеры для класса
     const int getOrderNumber();
     const string getOrderDate();
+    VinylRecord& getOrderedRecord();
     const int getQuantityOrdered();
     const float getTotalCost();
 };
