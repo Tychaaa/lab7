@@ -7,18 +7,25 @@
 #include <Windows.h>
 using namespace std;
 
+// Функция для ввода информации о магазине
 Store inputStore();
 
+// Функция для добавления виниловых пластинок в магазин
 void addVinylRecordsToStore(Store& store);
 
+// Функция для добавления сотрудников в магазин
 void addEmployeesToStore(Store& store);
 
+// Функция для удаления виниловой пластинки из магазина
 void removeVinylRecord(Store& store);
 
+// Функция для удаления сотрудника из магазина
 void removeEmployee(Store& store);
 
+// Функция для ввода информации о заказах
 Order* inputOrders(Store store);
 
+// Функция для вывода информации о заказах
 void outputOrders(Order* ordersArray);
 
 // Функция для ввода информации о виниловой пластинке

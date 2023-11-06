@@ -1,5 +1,6 @@
 #include "Functions.h"
 
+// Функция для ввода информации о магазине
 Store inputStore() 
 {
     cout << "\n\t~~Создание магазина~~" << endl;
@@ -63,6 +64,7 @@ Store inputStore()
     // Создаем магазин с использованием конструктора с параметрами и возвращаем его
     Store store(name, address, vinylRecordsArray, employeeArray);
 
+    // Освобождение памяти
     delete[] vinylRecordsArray;
     delete[] employeeArray;
 
@@ -70,6 +72,7 @@ Store inputStore()
     return store;
 }
 
+// Функция для добавления виниловых пластинок в магазин
 void addVinylRecordsToStore(Store& store)
 {
     cout << "\n\t~~Добавление новых пластинок в магазин~~" << endl;
@@ -78,6 +81,12 @@ void addVinylRecordsToStore(Store& store)
     int numNewRecords;
     cout << "Введите количество новых виниловых пластинок: ";
     cin >> numNewRecords;
+
+    if (numNewRecords == 0)
+    {
+        cout << "Добавление отменено!\n" << endl;
+        return;
+    }
 
     int newTotalRecords = numRecords + numNewRecords;
 
@@ -117,6 +126,7 @@ void addVinylRecordsToStore(Store& store)
     delete[] tempRecords;
 }
 
+// Функция для добавления сотрудников в магазин
 void addEmployeesToStore(Store& store)
 {
     cout << "\n\t~~Добавление новых сотрудников в магазин~~" << endl;
@@ -125,6 +135,12 @@ void addEmployeesToStore(Store& store)
     int numNewEmployees;
     cout << "Введите количество новых сотрудников: ";
     cin >> numNewEmployees;
+
+    if (numNewEmployees == 0)
+    {
+        cout << "Добавление отменено!\n" << endl;
+        return;
+    }
 
     int newTotalEmployees = numEmployees + numNewEmployees;
 
@@ -163,8 +179,16 @@ void addEmployeesToStore(Store& store)
     delete[] tempEmployees;
 }
 
+// Функция для удаления виниловой пластинки из магазина
 void removeVinylRecord(Store& store)
 {
+    if (numRecords == 1)
+    {
+        cout << "\n\t~~ПРЕДУПРЕЖДЕНИЕ~~" << endl;
+        cout << "Невозможно удалить единственную пластинку!\n" << endl;
+        return;
+    }
+
     cout << "\n\t~~Удаление виниловых пластинок из магазина~~" << endl;
 
     cout << "-------------------------------------------" << endl;
@@ -203,8 +227,16 @@ void removeVinylRecord(Store& store)
     cout << "-------------------------------------------" << endl;
 }
 
+// Функция для удаления сотрудника из магазина
 void removeEmployee(Store& store)
 {
+    if (numEmployees == 1) 
+    {
+        cout << "\n\t~~ПРЕДУПРЕЖДЕНИЕ~~" << endl;
+        cout << "Невозможно удалить последнего сотрудника!\n" << endl;
+        return;
+    }
+
     cout << "\n\t~~Удаление сотрудников из магазина~~" << endl;
 
     cout << "-------------------------------------------" << endl;
@@ -242,6 +274,7 @@ void removeEmployee(Store& store)
     cout << "-------------------------------------------" << endl;
 }
 
+// Функция для ввода информации о заказах
 Order* inputOrders(Store store)
 {
     cout << "\n\t~~Создание заказа~~" << endl;
@@ -251,6 +284,7 @@ Order* inputOrders(Store store)
     cin >> numOrders;
     cin.ignore();
 
+    // Создание массива для хранения заказов
     Order* ordersArray = new Order[numOrders];
 
     cout << "-------------------------------------------" << endl;
@@ -326,6 +360,7 @@ Order* inputOrders(Store store)
             cin.ignore();
             cout << "-------------------------------------------" << endl;
 
+            // Проверка на наличие пластинок в магазине (дружественная функция)
             if (!checkAvailability(vinylRecords[vinylIndex], quantityOrdered, store)) {
                 cout << "Недостаточно пластинок в наличии. Пожалуйста, уточните количество." << endl;
             }
@@ -339,6 +374,7 @@ Order* inputOrders(Store store)
     return ordersArray;
 }
 
+// Функция для вывода информации о заказах
 void outputOrders(Order* ordersArray) {
     cout << "\n\t~~Информация о заказах~~" << endl;
     cout << "-------------------------------------------" << endl;
@@ -350,6 +386,7 @@ void outputOrders(Order* ordersArray) {
     }
 }
 
+// Дружественная функция для проверки наличия достаточного количества заказанных пластинок в магазине
 bool checkAvailability(VinylRecord& orderedRecord, int orderedQuantity, Store& store) {
     // Получаем список виниловых пластинок в магазине
     VinylRecord* vinylRecordsInStore = store.getVinylRecordsInStore();

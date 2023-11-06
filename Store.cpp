@@ -18,6 +18,7 @@ Store::Store(string name, string address, VinylRecord* vinylRecordsArray, Employ
 // Деструктор
 Store::~Store() {}
 
+// Метод для вывода полной информации о сотрудниках магазина
 void Store::outputEmployees()
 {
     cout << "\n\t~~Информация о сотрудниках магазина \"" << getStoreName() << "\"~~" << endl;
@@ -37,6 +38,7 @@ void Store::outputEmployees()
     cout << endl;
 }
 
+// Метод для вывода краткой информации о сотрудниках магазина
 void Store::outputEmployeesShortList()
 {
     cout << "Сотрудники магазина:" << endl;
@@ -49,6 +51,7 @@ void Store::outputEmployeesShortList()
     }
 }
 
+// Метод для вывода полной информации о виниловых пластинках в магазине
 void Store::outputVinylRecords()
 {
     cout << "\n\t~~Информация о виниловых пластинках в магазине \"" << getStoreName() << "\"~~" << endl;
@@ -70,6 +73,7 @@ void Store::outputVinylRecords()
     cout << endl;
 }
 
+// Метод для вывода краткой информации о виниловых пластинках в магазине
 void Store::outputVinylRecordsShortList()
 {
     cout << "Пластинки в наличии:" << endl;
@@ -106,6 +110,7 @@ void Store::setStoreAddress(string storeAddress)
     this->storeAddress = storeAddress;
 }
 
+// Метод для установки пластинок в наличии
 void Store::setVinylRecordsInStore(VinylRecord* vinylRecordsArray)
 {
     // Перебираем все виниловые пластинки и копируем их в массив магазина
@@ -114,6 +119,7 @@ void Store::setVinylRecordsInStore(VinylRecord* vinylRecordsArray)
     }
 }
 
+// Метод для установки сотрудников в магазине
 void Store::setEmployeesInStore(Employee* employeeArray)
 {
     // Перебираем всех сотрудников и копируем их в массив магазина

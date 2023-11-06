@@ -23,6 +23,7 @@ using namespace std;
 // Глобальные переменные для подсчета количества пластинок, сотрудников и заказов
 int numRecords, numEmployees, numOrders;
 
+// Глобальные флаги для проверки создания магазина и заказов
 bool StoreCreated = false;
 bool OrderCreated = false;
 
@@ -41,9 +42,11 @@ int main()
     do {
         system("cls");
 
+        // Выводим заголовок программы
         cout << "\t~~Модификация программы из лабораторной работы №2~~" << endl;
         cout << endl;
 
+        // Выводим меню действий
         cout << "Главное меню:" << endl;
         cout << "1. Создать магазин пластинок" << endl;
         cout << "2. Добавить пластинки в магазин" << endl;
@@ -58,6 +61,8 @@ int main()
         cout << "0. Выход из программы" << endl;
 
         cout << "\nВыберите действие: ";
+
+        // Проверяем корректность ввода числа
         while (!(cin >> input)) {
             {
                 cin.clear(); //Сбрасываем флаг ошибки, если таковая была
@@ -67,8 +72,10 @@ int main()
         }
         cin.ignore(); // Очищаем буфер после ввода числа
 
+        // Обработка введенного действи
         switch (input) {
             
+        // Создание магазина пластинок
         case 1:
             do {
                 system("cls");
@@ -79,6 +86,7 @@ int main()
                 }
                 else 
                 {
+                    // Предупреждение при попытке создать новый магазин при уже существующем
                     cout << "\n\t\t~~ПРЕДУПРЕЖДЕНИЕ~~" << endl;
                     cout << "-------------------------------------------" << endl;
                     cout << "Магазин уже создан. Хотите создать новый магазин?" << endl;
@@ -87,6 +95,7 @@ int main()
                     cin >> response;
                     cout << "-------------------------------------------" << endl;
 
+                    // Обработка ответа пользователя
                     if (response == 'y' || response == 'Y') {
                         system("cls");
                         vinylStore = inputStore();
@@ -102,6 +111,7 @@ int main()
             } while (_getch() != ESCAPE);
             break;
 
+        // Добавление пластинок в магазин
         case 2:
             if (StoreCreated) 
             {
@@ -117,6 +127,7 @@ int main()
             }
             break;
 
+        // Добавление сотрудников в магазин
         case 3:
             if (StoreCreated)
             {
@@ -132,6 +143,7 @@ int main()
             }
             break;
 
+        // Удаление пластинки из ассортимента магазина
         case 4:
             if (StoreCreated)
             {
@@ -147,6 +159,7 @@ int main()
             }
             break;
 
+        // Удаление сотрудника из магазина
         case 5:
             if (StoreCreated)
             {
@@ -162,6 +175,7 @@ int main()
             }
             break;
 
+        // Просмотр информации о магазине
         case 6:
             if (StoreCreated)
             {
@@ -177,6 +191,7 @@ int main()
             }
             break;
 
+        // Просмотр информации о сотрудниках магазина
         case 7:
             if (StoreCreated)
             {
@@ -192,6 +207,7 @@ int main()
             }
             break;
 
+        // Просмотр ассортимента магазина
         case 8:
             if (StoreCreated)
             {
@@ -207,6 +223,7 @@ int main()
             }
             break;
 
+        // Создание заказа
         case 9:
             if (StoreCreated)
             {
@@ -223,6 +240,7 @@ int main()
             }
             break;
 
+        // Просмотр информации о заказе
         case 10:
             if (StoreCreated && OrderCreated)
             {
@@ -238,17 +256,21 @@ int main()
             }
             break;
 
+        // Выход из программы
         case 0:
             cout << "\n\t--------------" << endl;
             cout << "\t До свидания!" << endl;
             cout << "\t--------------" << endl;
             break;
+
+        // Обработка некорректного ввода
         default:
             cout << "\nНекорректный выбор!\n" << endl;
             Sleep(1000);
         }
     } while (input != 0);
 
+    // Освобождение памяти
     delete[] ordersArray;
 
     return 0;

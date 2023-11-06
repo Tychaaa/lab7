@@ -33,6 +33,7 @@ public:
     // Дружественная функция для проверки наличия достаточного количества заказанных пластинок в магазине
     friend bool checkAvailability(VinylRecord& orderedRecord, int orderedQuantity, Store& store);
 
+    // Методы для вывода информации о сотрудниках и виниловых пластинках в магазине
     void outputEmployees();
     void outputEmployeesShortList();
     void outputVinylRecords();

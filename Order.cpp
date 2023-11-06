@@ -1,6 +1,7 @@
 #include "Order.h"
 
-int Order::orderNumberGenerator = Order::generateOrderNumber(); // »нициализируем переменную дл€ номера заказа
+// »нициализируем переменную дл€ номера заказа
+int Order::orderNumberGenerator = Order::generateOrderNumber();
 
 //  онтруктор без параметров
 Order::Order() : orderNumber(0), orderDate(""), quantityOrdered(0), totalCost(0) {}
@@ -29,6 +30,7 @@ void Order::outputOrder()
 
 }
 
+// —татический метод дл€ генерации уникального номера заказа
 int Order::generateOrderNumber() 
 {
     srand(static_cast<unsigned int>(time(0)));  // »нициализаци€ генератора случайных чисел
@@ -65,6 +67,7 @@ const string Order::getOrderDate()
     return orderDate;
 }
 
+// ћетод дл€ получени€ заказанной пластинки
 VinylRecord& Order::getOrderedRecord()
 {
     return orderedRecord;
