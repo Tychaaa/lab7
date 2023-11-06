@@ -34,7 +34,7 @@ public:
     ~Order();
 
     // Дружественная функция для проверки наличия достаточного количества заказанных пластинок в магазине
-    friend bool checkAvailability(Order& order, Store& store);
+    //friend bool checkAvailability(Order& order, Store& store);
 
     // Метод для вывода информации о заказе
     void outputOrder();

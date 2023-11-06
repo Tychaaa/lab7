@@ -242,22 +242,107 @@ void removeEmployee(Store& store)
     cout << "-------------------------------------------" << endl;
 }
 
-//float calculateDiscount(Order& order) 
-//{
-//    const float DISCOUNT_RATE = 0.1; // Уровень скидки (10%)
-//
-//    float totalCost = order.getTotalCost(); // Получаем общую стоимость заказа с помощью геттера
-//
-//    // Если общая стоимость заказа больше 1000, применяем скидку
-//    if (totalCost > 1000) {
-//        float discount = totalCost * DISCOUNT_RATE;
-//        return discount;
-//    }
-//    else {
-//        // Если общая стоимость заказа не превышает 1000, скидка не применяется
-//        return 0.0;
-//    }
-//}
+Order* inputOrders(Store store)
+{
+    cout << "\n\t~~Создание заказа~~" << endl;
+
+    cout << "-------------------------------------------" << endl;
+    cout << "Введите количество заказов: ";
+    cin >> numOrders;
+    cin.ignore();
+
+    Order* ordersArray = new Order[numOrders];
+
+    cout << "-------------------------------------------" << endl;
+    for (int i = 0; i < numOrders; ++i) {
+        cout << "\tЗаказ #" << i + 1 << ":" << endl;
+
+        string orderDate;
+
+        cout << "-------------------------------------------" << endl;
+        cout << "Введите дату заказа: ";
+        getline(cin, orderDate);
+
+        int employeeIndex;
+        bool isValidChoice = false;
+
+        cout << "-------------------------------------------" << endl;
+        
+        // Получаем указатель на массив сотрудников в магазине
+        Employee* employees = store.getEmployeesInStore();
+        store.outputEmployeesShortList();
+
+        cout << "Выберите сотрудника, обслуживающего заказ: ";
+
+        do {
+            int choice;
+            cin >> choice;
+
+            if (choice >= 1 && choice <= numEmployees) {
+                employeeIndex = choice - 1;
+                isValidChoice = true;
+            }
+            else {
+                cout << "Некорректный выбор." << endl;
+            }
+        } while (!isValidChoice);
+
+        string clientFirstName, clientLastName, clientAddress;
+        float clientMoney;
+
+        cout << "-------------------------------------------" << endl;
+        cout << "Введите информацию о клиенте, оформляющем заказ:" << endl;
+        inputCustomer(&clientFirstName, &clientLastName, &clientMoney, &clientAddress);
+
+        int vinylIndex;
+        isValidChoice = false;
+
+        cout << "-------------------------------------------" << endl;
+        
+        // Получаем указатель на массив виниловых пластинок в магазине
+        VinylRecord* vinylRecords = store.getVinylRecordsInStore();
+        store.outputVinylRecordsShortList();
+
+        cout << "Выберите виниловую пластинку для заказа: ";
+
+        do {
+            int choice;
+            cin >> choice;
+
+            if (choice >= 1 && choice <= numRecords) {
+                vinylIndex = choice - 1;
+                isValidChoice = true;
+            }
+            else {
+                cout << "Некорректный выбор." << endl;
+            }
+        } while (!isValidChoice);
+
+        cout << "-------------------------------------------" << endl;
+        int quantityOrdered;
+        cout << "Введите количество заказанных виниловых пластинок: ";
+        cin >> quantityOrdered;
+        cin.ignore();
+        cout << "-------------------------------------------" << endl;
+
+        float totalCost = vinylRecords[vinylIndex].getPrice() * quantityOrdered;
+
+        ordersArray[i] = Order(orderDate, employees[employeeIndex], Customer(clientFirstName, clientLastName, clientMoney, clientAddress), vinylRecords[vinylIndex], quantityOrdered, totalCost);
+    }
+
+    return ordersArray;
+}
+
+void outputOrders(Order* ordersArray) {
+    cout << "\n\t~~Информация о заказах~~" << endl;
+    cout << "-------------------------------------------" << endl;
+
+    for (int i = 0; i < numOrders; ++i) {
+        cout << "Заказ #" << i + 1 << ":" << endl;
+        ordersArray[i].outputOrder();
+        cout << "-------------------------------------------" << endl;
+    }
+}
 
 bool checkAvailability(Order& order, Store& store) {
     VinylRecord& orderedRecord = order.getOrderedRecord(); // Получаем заказанный альбом из заказа
@@ -327,14 +412,11 @@ void inputCustomer(string* firstName, string* lastName, float* money, string* ad
     cout << "Введите адрес доставки клиента: ";
     cin.ignore(); // Очищаем буфер для считывания строки
     getline(cin, *address);
-
-    cout << endl;
 }
 
 // Функция для ввода информации о сотруднике магазина
 void inputEmployee(string* firstName, string* lastName, string* position, float* salary) 
 {
-
     cout << "Введите имя сотрудника: ";
     cin >> *firstName;
 

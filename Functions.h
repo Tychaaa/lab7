@@ -17,6 +17,10 @@ void removeVinylRecord(Store& store);
 
 void removeEmployee(Store& store);
 
+Order* inputOrders(Store store);
+
+void outputOrders(Order* ordersArray);
+
 // Функция для ввода информации о виниловой пластинке
 void inputVinylRecord(string& album, string& artist, int& year, string& genre, float& price, int& quantity);
 

@@ -33,6 +33,7 @@ int main()
     SetConsoleOutputCP(1251);    
 
     Store vinylStore;
+    Order* ordersArray = nullptr;
 
     int input;
 
@@ -47,11 +48,13 @@ int main()
         cout << "1. Создать магазин пластинок" << endl;
         cout << "2. Добавить пластинки в магазин" << endl;
         cout << "3. Добавить сотрудников в магазин" << endl;
-        cout << "4. Посмотреть информацию о магазине" << endl;
-        cout << "5. Посмотреть информацию о сотрудниках" << endl;
-        cout << "6. Посмотреть ассортимент магазина" << endl;
-        cout << "7. Создать заказ" << endl;
-        cout << "8. Посмотреть информацию о заказе" << endl;
+        cout << "4. Удалить пластинку из ассортимента" << endl;
+        cout << "5. Удалить сотрудника из магазина" << endl;
+        cout << "6. Посмотреть информацию о магазине" << endl;
+        cout << "7. Посмотреть информацию о сотрудниках" << endl;
+        cout << "8. Посмотреть ассортимент магазина" << endl;
+        cout << "9. Создать заказ" << endl;
+        cout << "10. Посмотреть информацию о заказе" << endl;
         cout << "0. Выход из программы" << endl;
 
         cout << "Выберите действие: ";
@@ -116,12 +119,28 @@ int main()
         case 4:
             do {
                 system("cls");
+                removeVinylRecord(vinylStore);
+                cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+            } while (_getch() != ESCAPE);
+            break;
+
+        case 5:
+            do {
+                system("cls");
+                removeEmployee(vinylStore);
+                cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+            } while (_getch() != ESCAPE);
+            break;
+
+        case 6:
+            do {
+                system("cls");
                 vinylStore.outputStore();
                 cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
             } while (_getch() != ESCAPE);
             break;
 
-        case 5:
+        case 7:
             do {
                 system("cls");
                 vinylStore.outputEmployees();
@@ -129,7 +148,7 @@ int main()
             } while (_getch() != ESCAPE);
             break;
 
-        case 6:
+        case 8:
             do {
                 system("cls");
                 vinylStore.outputVinylRecords();
@@ -137,20 +156,18 @@ int main()
             } while (_getch() != ESCAPE);
             break;
 
-        case 7:
-            cout << "действие 7" << endl;
-            Sleep(1000);
-            break;
-
-        case 8:
-            cout << "действие 8" << endl;
-            Sleep(1000);
-            break;
-
         case 9:
             do {
                 system("cls");
-                removeEmployee(vinylStore);
+                ordersArray = inputOrders(vinylStore);
+                cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+            } while (_getch() != ESCAPE);
+            break;
+
+        case 10:
+            do {
+                system("cls");
+                outputOrders(ordersArray);
                 cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
             } while (_getch() != ESCAPE);
             break;
