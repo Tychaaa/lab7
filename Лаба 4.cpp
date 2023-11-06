@@ -57,7 +57,7 @@ int main()
         cout << "10. Посмотреть информацию о заказе" << endl;
         cout << "0. Выход из программы" << endl;
 
-        cout << "Выберите действие: ";
+        cout << "\nВыберите действие: ";
         while (!(cin >> input)) {
             {
                 cin.clear(); //Сбрасываем флаг ошибки, если таковая была
@@ -72,11 +72,13 @@ int main()
         case 1:
             do {
                 system("cls");
-                if (!StoreCreated) {
+                if (!StoreCreated) 
+                {
                     vinylStore = inputStore();
                     StoreCreated = true;
                 }
-                else {
+                else 
+                {
                     cout << "\n\t\t~~ПРЕДУПРЕЖДЕНИЕ~~" << endl;
                     cout << "-------------------------------------------" << endl;
                     cout << "Магазин уже создан. Хотите создать новый магазин?" << endl;
@@ -101,75 +103,139 @@ int main()
             break;
 
         case 2:
-            do {
-                system("cls");
-                addVinylRecordsToStore(vinylStore);
-                cout << "Чтобы продолжить нажмите 'Esc'" << endl;
-            } while (_getch() != ESCAPE);
+            if (StoreCreated) 
+            {
+                do {
+                    system("cls");
+                    addVinylRecordsToStore(vinylStore);
+                    cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
+                Sleep(1500);
+            }
             break;
 
         case 3:
-            do {
-                system("cls");
-                addEmployeesToStore(vinylStore);
-                cout << "Чтобы продолжить нажмите 'Esc'" << endl;
-            } while (_getch() != ESCAPE);
+            if (StoreCreated)
+            {
+                do {
+                    system("cls");
+                    addEmployeesToStore(vinylStore);
+                    cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
+                Sleep(1500);
+            }
             break;
 
         case 4:
-            do {
-                system("cls");
-                removeVinylRecord(vinylStore);
-                cout << "Чтобы продолжить нажмите 'Esc'" << endl;
-            } while (_getch() != ESCAPE);
+            if (StoreCreated)
+            {
+                do {
+                    system("cls");
+                    removeVinylRecord(vinylStore);
+                    cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
+                Sleep(1500);
+            }
             break;
 
         case 5:
-            do {
-                system("cls");
-                removeEmployee(vinylStore);
-                cout << "Чтобы продолжить нажмите 'Esc'" << endl;
-            } while (_getch() != ESCAPE);
+            if (StoreCreated)
+            {
+                do {
+                    system("cls");
+                    removeEmployee(vinylStore);
+                    cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
+                Sleep(1500);
+            }
             break;
 
         case 6:
-            do {
-                system("cls");
-                vinylStore.outputStore();
-                cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
-            } while (_getch() != ESCAPE);
+            if (StoreCreated)
+            {
+                do {
+                    system("cls");
+                    vinylStore.outputStore();
+                    cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
+                Sleep(1500);
+            }
             break;
 
         case 7:
-            do {
-                system("cls");
-                vinylStore.outputEmployees();
-                cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
-            } while (_getch() != ESCAPE);
+            if (StoreCreated)
+            {
+                do {
+                    system("cls");
+                    vinylStore.outputEmployees();
+                    cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
+                Sleep(1500);
+            }
             break;
 
         case 8:
-            do {
-                system("cls");
-                vinylStore.outputVinylRecords();
-                cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
-            } while (_getch() != ESCAPE);
+            if (StoreCreated)
+            {
+                do {
+                    system("cls");
+                    vinylStore.outputVinylRecords();
+                    cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
+                Sleep(1500);
+            }
             break;
 
         case 9:
-            do {
-                system("cls");
-                ordersArray = inputOrders(vinylStore);
-                cout << "Чтобы продолжить нажмите 'Esc'" << endl;
-            } while (_getch() != ESCAPE);
+            if (StoreCreated)
+            {
+                do {
+                    system("cls");
+                    ordersArray = inputOrders(vinylStore);
+                    OrderCreated = true;
+                    cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
+                Sleep(1500);
+            }
             break;
 
         case 10:
-            do {
-                system("cls");
-                outputOrders(ordersArray);
-                cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
-            } while (_getch() != ESCAPE);
+            if (StoreCreated && OrderCreated)
+            {
+                do {
+                    system("cls");
+                    outputOrders(ordersArray);
+                    cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nНи одного заказа не найдено!" << endl;
+                Sleep(1500);
+            }
             break;
 
         case 0:
@@ -182,6 +248,8 @@ int main()
             Sleep(1000);
         }
     } while (input != 0);
+
+    delete[] ordersArray;
 
     return 0;
 }

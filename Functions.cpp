@@ -320,10 +320,16 @@ Order* inputOrders(Store store)
 
         cout << "-------------------------------------------" << endl;
         int quantityOrdered;
-        cout << "¬ведите количество заказанных виниловых пластинок: ";
-        cin >> quantityOrdered;
-        cin.ignore();
-        cout << "-------------------------------------------" << endl;
+        do {
+            cout << "¬ведите количество заказанных виниловых пластинок: ";
+            cin >> quantityOrdered;
+            cin.ignore();
+            cout << "-------------------------------------------" << endl;
+
+            if (!checkAvailability(vinylRecords[vinylIndex], quantityOrdered, store)) {
+                cout << "Ќедостаточно пластинок в наличии. ѕожалуйста, уточните количество." << endl;
+            }
+        } while (!checkAvailability(vinylRecords[vinylIndex], quantityOrdered, store));
 
         float totalCost = vinylRecords[vinylIndex].getPrice() * quantityOrdered;
 
@@ -344,10 +350,7 @@ void outputOrders(Order* ordersArray) {
     }
 }
 
-bool checkAvailability(Order& order, Store& store) {
-    VinylRecord& orderedRecord = order.getOrderedRecord(); // ѕолучаем заказанный альбом из заказа
-    int orderedQuantity = order.getQuantityOrdered(); // ѕолучаем количество заказанных пластинок из заказа
-
+bool checkAvailability(VinylRecord& orderedRecord, int orderedQuantity, Store& store) {
     // ѕолучаем список виниловых пластинок в магазине
     VinylRecord* vinylRecordsInStore = store.getVinylRecordsInStore();
 

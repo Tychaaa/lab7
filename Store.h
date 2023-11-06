@@ -31,7 +31,7 @@ public:
     ~Store();
 
     // Дружественная функция для проверки наличия достаточного количества заказанных пластинок в магазине
-    //friend bool checkAvailability(Order& order, Store& store);
+    friend bool checkAvailability(VinylRecord& orderedRecord, int orderedQuantity, Store& store);
 
     void outputEmployees();
     void outputEmployeesShortList();

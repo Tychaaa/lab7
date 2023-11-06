@@ -11,6 +11,8 @@ using namespace std;
 // Глобальные переменные для подсчета заказов
 extern int numOrders;
 
+class Store;
+
 // Класс для объекта "Заказ"
 class Order {
 private:
@@ -34,7 +36,7 @@ public:
     ~Order();
 
     // Дружественная функция для проверки наличия достаточного количества заказанных пластинок в магазине
-    //friend bool checkAvailability(Order& order, Store& store);
+    friend bool checkAvailability(VinylRecord& orderedRecord, int orderedQuantity, Store& store);
 
     // Метод для вывода информации о заказе
     void outputOrder();
