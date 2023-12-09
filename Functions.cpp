@@ -309,7 +309,7 @@ void removeEmployee(Store& store)
 }
 
 // Функция для ввода информации о заказах
-Order* inputOrders(Store store)
+Order* inputOrders(Store store, string vinylInfo[][2])
 {
     cout << "\n\t~~Создание заказа~~" << endl;
 
@@ -439,10 +439,27 @@ Order* inputOrders(Store store)
 
         float totalCost = vinylRecords[vinylIndex].getPrice() * quantityOrdered;
 
+        // Добавляем информацию о виниловой пластинке и её итоговой стоимости в двумерный массив
+        vinylInfo[i][0] = vinylRecords[vinylIndex].getAlbumName();  // Название виниловой пластинки
+        vinylInfo[i][1] = to_string(totalCost);                     // Итоговая стоимость
+
         ordersArray[i] = Order(orderDate, employees[employeeIndex], Customer(clientFirstName, clientLastName, clientMoney, clientAddress), vinylRecords[vinylIndex], quantityOrdered, totalCost);
     }
 
     return ordersArray;
+}
+
+void outputVinylInfo(string vinylInfo[][2]) {
+    cout << "\n\t~~Информация о виниловых пластинках в заказах~~" << endl;
+    cout << "-------------------------------------------------" << endl;
+
+    for (int i = 0; i < numOrders; ++i) {
+        cout << "Заказ #" << i + 1 << ":" << endl;
+        cout << "Название пластинки: " << vinylInfo[i][0] << endl;
+        cout << "Итоговая стоимость: " << vinylInfo[i][1] << endl;
+        cout << "-------------------------------------------------" << endl;
+    }
+    cout << endl;
 }
 
 // Функция для вывода информации о заказах

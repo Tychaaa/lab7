@@ -3,6 +3,7 @@
 #define MAX_EMPLOYEE 20
 #define MAX_ORDER 10
 #define ESCAPE 27
+#define NOMINMAX
 
 #include <iostream>
 #include <string>
@@ -36,6 +37,9 @@ int main()
     Store vinylStore;
     Order* ordersArray = nullptr;
 
+    // Двумерный массив для хранения информации о виниловых пластинках и их итоговой стоимости
+    string vinylInfo[MAX_ORDER][2];
+
     int input;
 
     // Главный цикл программы
@@ -58,17 +62,16 @@ int main()
         cout << "8. Посмотреть ассортимент магазина" << endl;
         cout << "9. Создать заказ" << endl;
         cout << "10. Посмотреть информацию о заказе" << endl;
+        cout << "11. Посмотреть информацию о заказанных пластинках" << endl;
         cout << "0. Выход из программы" << endl;
 
         cout << "\nВыберите действие: ";
 
         // Проверяем корректность ввода числа
         while (!(cin >> input)) {
-            {
-                cin.clear(); //Сбрасываем флаг ошибки, если таковая была
-                cin.ignore(1000, '\n'); //Игнорируем оставшиеся в потоке данные
-                cout << "\nНекорректный ввод!\n\nВыберите действие: ";
-            }
+            cin.clear(); //Сбрасываем флаг ошибки, если таковая была
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); //Игнорируем оставшиеся в потоке данные
+            cout << "\nНекорректный ввод!\n\nВыберите действие: ";
         }
         cin.ignore(); // Очищаем буфер после ввода числа
 
@@ -270,7 +273,7 @@ int main()
                     try
                     {
                         system("cls");
-                        ordersArray = inputOrders(vinylStore);
+                        ordersArray = inputOrders(vinylStore, vinylInfo);
                         OrderCreated = true;
                         cout << "Чтобы продолжить нажмите 'Esc'" << endl;
                     }
@@ -294,6 +297,21 @@ int main()
                 do {
                     system("cls");
                     outputOrders(ordersArray);
+                    cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nНи одного заказа не найдено!" << endl;
+                Sleep(1500);
+            }
+            break;
+
+        case 11:
+            if (StoreCreated && OrderCreated)
+            {
+                do {
+                    system("cls");
+                    outputVinylInfo(vinylInfo);
                     cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
                 } while (_getch() != ESCAPE);
             }

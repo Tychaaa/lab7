@@ -2,7 +2,9 @@
 #include "Store.h"
 #include "Order.h"
 
+#define MAX_ORDER 10
 #define NOMINMAX
+
 #include <string>
 #include <iostream>
 #include <Windows.h>
@@ -24,7 +26,9 @@ void removeVinylRecord(Store& store);
 void removeEmployee(Store& store);
 
 // Функция для ввода информации о заказах
-Order* inputOrders(Store store);
+Order* inputOrders(Store store, string vinylInfo[][2]);
+
+void outputVinylInfo(string vinylInfo[][2]);
 
 // Функция для вывода информации о заказах
 void outputOrders(Order* ordersArray);
