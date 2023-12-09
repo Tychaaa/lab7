@@ -19,6 +19,18 @@ Store inputStore()
     cout << "Введите количество виниловых пластинок: ";
     cin >> numRecords;
 
+    // Создаем исключения на ввод некорректноко значения
+    if (cin.fail()) 
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        throw invalid_argument("\n\t\t~~ОШИБКА~~\nКоличество пластинок должно быть положительным целым числом!\n");
+    }
+    if (numRecords <= 0)
+    {
+        throw exception("\n\t~~ПРЕДУПРЕЖДЕНИЕ~~\nКоличество пластинок должно быть больше нуля!\n");
+    }
+
     cout << "-------------------------------------------" << endl;
 
     // Динамический массив объектов класса VinylRecord
@@ -41,6 +53,18 @@ Store inputStore()
 
     cout << "Введите количество сотрудников магазина: ";
     cin >> numEmployees;
+
+    // Создаем исключения на ввод некорректноко значения
+    if (cin.fail())
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        throw invalid_argument("\n\t\t~~ОШИБКА~~\nКоличество сотрудников должно быть положительным целым числом!\n");
+    }
+    if (numEmployees <= 0)
+    {
+        throw exception("\n\t~~ПРЕДУПРЕЖДЕНИЕ~~\nКоличество сотрудников должно быть больше нуля!\n");
+    }
 
     cout << "-------------------------------------------" << endl;
 
@@ -82,10 +106,16 @@ void addVinylRecordsToStore(Store& store)
     cout << "Введите количество новых виниловых пластинок: ";
     cin >> numNewRecords;
 
-    if (numNewRecords == 0)
+    // Создаем исключения на ввод некорректноко значения
+    if (cin.fail())
     {
-        cout << "Добавление отменено!\n" << endl;
-        return;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        throw invalid_argument("\n\t\t~~ОШИБКА~~\nКоличество пластинок должно быть положительным целым числом!\n");
+    }
+    if (numNewRecords <= 0)
+    {
+        throw exception("\n\t~~ПРЕДУПРЕЖДЕНИЕ~~\nКоличество пластинок должно быть больше нуля!\n");
     }
 
     int newTotalRecords = numRecords + numNewRecords;
@@ -136,10 +166,16 @@ void addEmployeesToStore(Store& store)
     cout << "Введите количество новых сотрудников: ";
     cin >> numNewEmployees;
 
-    if (numNewEmployees == 0)
+    // Создаем исключения на ввод некорректноко значения
+    if (cin.fail())
     {
-        cout << "Добавление отменено!\n" << endl;
-        return;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        throw invalid_argument("\n\t\t~~ОШИБКА~~\nКоличество сотрудников должно быть положительным целым числом!\n");
+    }
+    if (numNewEmployees <= 0)
+    {
+        throw exception("\n\t~~ПРЕДУПРЕЖДЕНИЕ~~\nКоличество сотрудников должно быть больше нуля!\n");
     }
 
     int newTotalEmployees = numEmployees + numNewEmployees;
@@ -182,11 +218,10 @@ void addEmployeesToStore(Store& store)
 // Функция для удаления виниловой пластинки из магазина
 void removeVinylRecord(Store& store)
 {
+    // Создаем исключение по значению
     if (numRecords == 1)
     {
-        cout << "\n\t~~ПРЕДУПРЕЖДЕНИЕ~~" << endl;
-        cout << "Невозможно удалить единственную пластинку!\n" << endl;
-        return;
+        throw exception("\n\t~~ПРЕДУПРЕЖДЕНИЕ~~\nНевозможно удалить единственную пластинку!\n");
     }
 
     cout << "\n\t~~Удаление виниловых пластинок из магазина~~" << endl;
@@ -221,7 +256,7 @@ void removeVinylRecord(Store& store)
     }
     else
     {
-        cout << "Некорректный индекс виниловой пластинки." << endl;
+        throw exception("Ошибка: Некорректный индекс виниловой пластинки.\n");
     }
 
     cout << "-------------------------------------------" << endl;
@@ -230,11 +265,10 @@ void removeVinylRecord(Store& store)
 // Функция для удаления сотрудника из магазина
 void removeEmployee(Store& store)
 {
+    // Создаем исключение по значению
     if (numEmployees == 1) 
     {
-        cout << "\n\t~~ПРЕДУПРЕЖДЕНИЕ~~" << endl;
-        cout << "Невозможно удалить последнего сотрудника!\n" << endl;
-        return;
+        throw exception("\n\t~~ПРЕДУПРЕЖДЕНИЕ~~\nНевозможно удалить последнего сотрудника!\n");
     }
 
     cout << "\n\t~~Удаление сотрудников из магазина~~" << endl;
@@ -269,7 +303,7 @@ void removeEmployee(Store& store)
     }
     else
     {
-        cout << "Некорректный индекс сотрудника." << endl;
+        throw exception("Ошибка: Некорректный индекс сотрудника.\n");
     }
     cout << "-------------------------------------------" << endl;
 }
@@ -282,6 +316,19 @@ Order* inputOrders(Store store)
     cout << "-------------------------------------------" << endl;
     cout << "Введите количество заказов: ";
     cin >> numOrders;
+
+    // Создаем исключения на ввод некорректноко значения
+    if (cin.fail())
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        throw invalid_argument("\n\t\t~~ОШИБКА~~\nКоличество заказов должно быть положительным целым числом!\n");
+    }
+    if (numOrders <= 0)
+    {
+        throw exception("\n\t~~ПРЕДУПРЕЖДЕНИЕ~~\nКоличество заказов должно быть больше нуля!\n");
+    }
+
     cin.ignore();
 
     // Создание массива для хранения заказов
@@ -310,14 +357,22 @@ Order* inputOrders(Store store)
 
         do {
             int choice;
-            cin >> choice;
+
+            while (!(cin >> choice)) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                cout << "\nНекорректный ввод!\n";
+                cout << "Введите количество заказанных виниловых пластинок: ";
+            }
 
             if (choice >= 1 && choice <= numEmployees) {
                 employeeIndex = choice - 1;
                 isValidChoice = true;
             }
             else {
-                cout << "Некорректный выбор." << endl;
+                cout << "Некорректный выбор.\n" << endl;
+                cout << "Выберите сотрудника, обслуживающего заказ: ";
             }
         } while (!isValidChoice);
 
@@ -341,14 +396,22 @@ Order* inputOrders(Store store)
 
         do {
             int choice;
-            cin >> choice;
+
+            while (!(cin >> choice)) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                cout << "\nНекорректный ввод!\n";
+                cout << "Выберите виниловую пластинку для заказа: ";
+            }
 
             if (choice >= 1 && choice <= numRecords) {
                 vinylIndex = choice - 1;
                 isValidChoice = true;
             }
             else {
-                cout << "Некорректный выбор." << endl;
+                cout << "Некорректный выбор.\n" << endl;
+                cout << "Выберите виниловую пластинку для заказа: ";
             }
         } while (!isValidChoice);
 
@@ -356,7 +419,15 @@ Order* inputOrders(Store store)
         int quantityOrdered;
         do {
             cout << "Введите количество заказанных виниловых пластинок: ";
-            cin >> quantityOrdered;
+
+            while (!(cin >> quantityOrdered)) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                cout << "\nНекорректный ввод!\n";
+                cout << "Введите количество заказанных виниловых пластинок: ";
+            }
+
             cin.ignore();
             cout << "-------------------------------------------" << endl;
 
@@ -424,17 +495,39 @@ void inputVinylRecord(string& album, string& artist, int& year, string& genre, f
     getline(cin, artist);
 
     cout << "Введите год выпуска: ";
-    cin >> year;
+
+    while (!(cin >> year)) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        cout << "\nНекорректный ввод!\n";
+        cout << "Введите год выпуска: ";
+    }
+
     cin.ignore();
 
     cout << "Введите жанр: ";
     getline(cin, genre);
 
     cout << "Введите цену: ";
-    cin >> price;
+
+    while (!(cin >> price)) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        cout << "\nНекорректный ввод!\n";
+        cout << "Введите цену: ";
+    }
 
     cout << "Введите количество в наличии: ";
-    cin >> quantity;
+
+    while (!(cin >> quantity)) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        cout << "\nНекорректный ввод!\n";
+        cout << "Введите количество в наличии: ";
+    }
 }
 
 // Функция для ввода информации о клиенте (пример возврата через указатель)
@@ -447,7 +540,14 @@ void inputCustomer(string* firstName, string* lastName, float* money, string* ad
     cin >> *lastName;
 
     cout << "Введите количества денег клиента: ";
-    cin >> *money;
+
+    while (!(cin >> *money)) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        cout << "\nНекорректный ввод!\n";
+        cout << "Введите количества денег клиента: ";
+    }
 
     cout << "Введите адрес доставки клиента: ";
     cin.ignore(); // Очищаем буфер для считывания строки
@@ -468,5 +568,12 @@ void inputEmployee(string* firstName, string* lastName, string* position, float*
     getline(cin, *position);
 
     cout << "Введите зарплату сотрудника: ";
-    cin >> *salary;
+
+    while (!(cin >> *salary)) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        cout << "\nНекорректный ввод!\n";
+        cout << "Введите зарплату сотрудника: ";
+    }
 }

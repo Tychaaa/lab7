@@ -79,33 +79,40 @@ int main()
         case 1:
             do {
                 system("cls");
-                if (!StoreCreated) 
+                try
                 {
-                    vinylStore = inputStore();
-                    StoreCreated = true;
-                }
-                else 
-                {
-                    // Предупреждение при попытке создать новый магазин при уже существующем
-                    cout << "\n\t\t~~ПРЕДУПРЕЖДЕНИЕ~~" << endl;
-                    cout << "-------------------------------------------" << endl;
-                    cout << "Магазин уже создан. Хотите создать новый магазин?" << endl;
-                    cout << "Введите ответ (y/n): ";
-                    char response;
-                    cin >> response;
-                    cout << "-------------------------------------------" << endl;
-
-                    // Обработка ответа пользователя
-                    if (response == 'y' || response == 'Y') {
-                        system("cls");
+                    if (!StoreCreated)
+                    {
                         vinylStore = inputStore();
-                        // Сбросить флаг создания заказа
-                        OrderCreated = false;
+                        StoreCreated = true;
                     }
-                    else {
-                        cout << "Магазин не будет пересоздан." << endl;
-                        cout << "-------------------------------------------\n" << endl;
+                    else
+                    {
+                        // Предупреждение при попытке создать новый магазин при уже существующем
+                        cout << "\n\t\t~~ПРЕДУПРЕЖДЕНИЕ~~" << endl;
+                        cout << "-------------------------------------------" << endl;
+                        cout << "Магазин уже создан. Хотите создать новый магазин?" << endl;
+                        cout << "Введите ответ (y/n): ";
+                        char response;
+                        cin >> response;
+                        cout << "-------------------------------------------" << endl;
+
+                        // Обработка ответа пользователя
+                        if (response == 'y' || response == 'Y') {
+                            system("cls");
+                            vinylStore = inputStore();
+                            // Сбросить флаг создания заказа
+                            OrderCreated = false;
+                        }
+                        else {
+                            cout << "Магазин не будет пересоздан." << endl;
+                            cout << "-------------------------------------------\n" << endl;
+                        }
                     }
+                }
+                catch (const std::exception& ex)
+                {
+                    cout << ex.what() << endl;
                 }
                 cout << "\nЧтобы продолжить нажмите 'Esc'" << endl;
             } while (_getch() != ESCAPE);
@@ -116,9 +123,17 @@ int main()
             if (StoreCreated) 
             {
                 do {
-                    system("cls");
-                    addVinylRecordsToStore(vinylStore);
-                    cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    try
+                    {
+                        system("cls");
+                        addVinylRecordsToStore(vinylStore);
+                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    }
+                    catch (const std::exception& ex)
+                    {
+                        cout << ex.what() << endl;
+                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    }
                 } while (_getch() != ESCAPE);
             }
             else {
@@ -132,9 +147,17 @@ int main()
             if (StoreCreated)
             {
                 do {
-                    system("cls");
-                    addEmployeesToStore(vinylStore);
-                    cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    try
+                    {
+                        system("cls");
+                        addEmployeesToStore(vinylStore);
+                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    }
+                    catch (const std::exception& ex)
+                    {
+                        cout << ex.what() << endl;
+                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    }
                 } while (_getch() != ESCAPE);
             }
             else {
@@ -148,9 +171,17 @@ int main()
             if (StoreCreated)
             {
                 do {
-                    system("cls");
-                    removeVinylRecord(vinylStore);
-                    cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    try
+                    {
+                        system("cls");
+                        removeVinylRecord(vinylStore);
+                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    }
+                    catch (const std::exception& ex)
+                    {
+                        cout << ex.what() << endl;
+                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    }
                 } while (_getch() != ESCAPE);
             }
             else {
@@ -164,9 +195,17 @@ int main()
             if (StoreCreated)
             {
                 do {
-                    system("cls");
-                    removeEmployee(vinylStore);
-                    cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    try
+                    {
+                        system("cls");
+                        removeEmployee(vinylStore);
+                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    }
+                    catch (const std::exception& ex)
+                    {
+                        cout << ex.what() << endl;
+                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    }
                 } while (_getch() != ESCAPE);
             }
             else {
@@ -228,10 +267,18 @@ int main()
             if (StoreCreated)
             {
                 do {
-                    system("cls");
-                    ordersArray = inputOrders(vinylStore);
-                    OrderCreated = true;
-                    cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    try
+                    {
+                        system("cls");
+                        ordersArray = inputOrders(vinylStore);
+                        OrderCreated = true;
+                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    }
+                    catch (const std::exception& ex)
+                    {
+                        cout << ex.what() << endl;
+                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    }
                 } while (_getch() != ESCAPE);
             }
             else {

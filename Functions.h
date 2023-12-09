@@ -2,6 +2,7 @@
 #include "Store.h"
 #include "Order.h"
 
+#define NOMINMAX
 #include <string>
 #include <iostream>
 #include <Windows.h>
