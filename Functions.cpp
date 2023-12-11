@@ -309,7 +309,7 @@ void removeEmployee(Store& store)
 }
 
 // Функция для ввода информации о заказах
-Order* inputOrders(Store store, string vinylInfo[][2])
+Order* inputOrders(Store store, string vinylInfo[][3])
 {
     cout << "\n\t~~Создание заказа~~" << endl;
 
@@ -439,26 +439,30 @@ Order* inputOrders(Store store, string vinylInfo[][2])
 
         float totalCost = vinylRecords[vinylIndex].getPrice() * quantityOrdered;
 
-        // Добавляем информацию о виниловой пластинке и её итоговой стоимости в двумерный массив
-        vinylInfo[i][0] = vinylRecords[vinylIndex].getAlbumName();  // Название виниловой пластинки
-        vinylInfo[i][1] = to_string(totalCost);                     // Итоговая стоимость
+        
 
         ordersArray[i] = Order(orderDate, employees[employeeIndex], Customer(clientFirstName, clientLastName, clientMoney, clientAddress), vinylRecords[vinylIndex], quantityOrdered, totalCost);
+
+        // Добавляем информацию о виниловой пластинке и её итоговой стоимости в двумерный массив
+        vinylInfo[i][0] = to_string(ordersArray[i].getOrderNumber()); // Номер заказа
+        vinylInfo[i][1] = vinylRecords[vinylIndex].getAlbumName();    // Название виниловой пластинки
+        vinylInfo[i][2] = to_string(totalCost);                       // Итоговая стоимость
     }
 
     return ordersArray;
 }
 
-void outputVinylInfo(string vinylInfo[][2]) {
+// Функция для вывода информации о заказанных пластинках
+void outputVinylInfo(string vinylInfo[][3]) {
     cout << "\n\t~~Информация о виниловых пластинках в заказах~~" << endl;
-    cout << "-------------------------------------------------" << endl;
+    cout << "---------------------------------------------------------------" << endl;
+
+    cout << setw(15) << left << "Номер заказа" << setw(30) << left << "Название пластинки" << setw(20) << left << "Итоговая стоимость" << endl;
 
     for (int i = 0; i < numOrders; ++i) {
-        cout << "Заказ #" << i + 1 << ":" << endl;
-        cout << "Название пластинки: " << vinylInfo[i][0] << endl;
-        cout << "Итоговая стоимость: " << vinylInfo[i][1] << endl;
-        cout << "-------------------------------------------------" << endl;
+        cout << setw(15) << left << vinylInfo[i][0] << setw(30) << left << vinylInfo[i][1] << setw(20) << left << vinylInfo[i][2] << endl;
     }
+    cout << "---------------------------------------------------------------" << endl;
     cout << endl;
 }
 

@@ -38,7 +38,7 @@ int main()
     Order* ordersArray = nullptr;
 
     // Двумерный массив для хранения информации о виниловых пластинках и их итоговой стоимости
-    string vinylInfo[MAX_ORDER][2];
+    string vinylInfo[MAX_ORDER][3];
 
     int input;
 
@@ -306,6 +306,7 @@ int main()
             }
             break;
 
+        // Просмотр информации о заказанных пластинках
         case 11:
             if (StoreCreated && OrderCreated)
             {

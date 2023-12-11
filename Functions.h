@@ -8,6 +8,7 @@
 #include <string>
 #include <iostream>
 #include <Windows.h>
+#include <iomanip> // Для использования setw
 using namespace std;
 
 // Функция для ввода информации о магазине
@@ -26,9 +27,10 @@ void removeVinylRecord(Store& store);
 void removeEmployee(Store& store);
 
 // Функция для ввода информации о заказах
-Order* inputOrders(Store store, string vinylInfo[][2]);
+Order* inputOrders(Store store, string vinylInfo[][3]);
 
-void outputVinylInfo(string vinylInfo[][2]);
+// Функция для ввода информации о заказанных пластинках
+void outputVinylInfo(string vinylInfo[][3]);
 
 // Функция для вывода информации о заказах
 void outputOrders(Order* ordersArray);
