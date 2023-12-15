@@ -6,7 +6,7 @@
 using namespace std;
 
 // Класс для объекта "Сотрудник магазина"
-class Employee {
+class Employee : public Human {
 private:
 
     Human person;       // Используем класс Human для представления сотрудника

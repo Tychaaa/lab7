@@ -40,7 +40,7 @@ public:
     void outputVinylRecordsShortList();
 
     // Метод для вывода информации о магазине
-    void outputStore();
+    virtual void outputStore();
 
     // Сеттеры для класса
     void setStoreName(string storeName);

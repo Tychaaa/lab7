@@ -131,6 +131,7 @@
     <ClCompile Include="Employee.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="Human.cpp" />
+    <ClCompile Include="OnlineStore.cpp" />
     <ClCompile Include="Order.cpp" />
     <ClCompile Include="Store.cpp" />
     <ClCompile Include="VinylRecord.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="Employee.h" />
     <ClInclude Include="Functions.h" />
     <ClInclude Include="Human.h" />
+    <ClInclude Include="OnlineStore.h" />
     <ClInclude Include="Order.h" />
     <ClInclude Include="Store.h" />
     <ClInclude Include="VinylRecord.h" />
