@@ -598,3 +598,130 @@ void inputEmployee(string* firstName, string* lastName, string* position, float*
         cout << "Введите зарплату сотрудника: ";
     }
 }
+
+// Меню радактирования магазина
+void editStoreMenu(Store& vinylStore) {
+    int input;
+    do {
+        system("cls"); // Очистка экрана
+
+        // Выводим заголовок программы
+        cout << "\t~~Лабораторная работа №5~~" << endl;
+        cout << endl;
+
+        // Выводим меню редактирования магазина
+        std::cout << "Меню редактирования магазина:" << std::endl;
+        std::cout << "1. Добавить пластинки в магазин" << std::endl;
+        std::cout << "2. Добавить сотрудников в магазин" << std::endl;
+        std::cout << "3. Удалить пластинку из ассортимента" << std::endl;
+        std::cout << "4. Удалить сотрудника из магазина" << std::endl;
+        std::cout << "0. Вернуться в главное меню" << std::endl;
+        std::cout << "\nВыберите действие: ";
+
+        while (!(std::cin >> input)) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Некорректный ввод! Выберите действие: ";
+        }
+        std::cin.ignore();
+
+        switch (input) {
+        case 1:
+            // Добавление пластинок в магазин
+            if (StoreCreated)
+            {
+                do {
+                    try
+                    {
+                        system("cls");
+                        addVinylRecordsToStore(vinylStore);
+                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    }
+                    catch (const std::exception& ex)
+                    {
+                        cout << ex.what() << endl;
+                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    }
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
+                Sleep(1500);
+            }
+            break;
+        case 2:
+            // Добавление сотрудников в магазин
+            if (StoreCreated)
+            {
+                do {
+                    try
+                    {
+                        system("cls");
+                        addEmployeesToStore(vinylStore);
+                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    }
+                    catch (const std::exception& ex)
+                    {
+                        cout << ex.what() << endl;
+                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    }
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
+                Sleep(1500);
+            }
+            break;
+        case 3:
+            // Удаление пластинки из ассортимента магазина
+            if (StoreCreated)
+            {
+                do {
+                    try
+                    {
+                        system("cls");
+                        removeVinylRecord(vinylStore);
+                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    }
+                    catch (const std::exception& ex)
+                    {
+                        cout << ex.what() << endl;
+                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    }
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
+                Sleep(1500);
+            }
+            break;
+        case 4:
+            // Удаление сотрудника из магазина
+            if (StoreCreated)
+            {
+                do {
+                    try
+                    {
+                        system("cls");
+                        removeEmployee(vinylStore);
+                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    }
+                    catch (const std::exception& ex)
+                    {
+                        cout << ex.what() << endl;
+                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
+                    }
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
+                Sleep(1500);
+            }
+            break;
+        case 0:
+            return; // Возвращаемся в главное меню
+        default:
+            std::cout << "Некорректный выбор!" << std::endl;
+        }
+    } while (true);
+}

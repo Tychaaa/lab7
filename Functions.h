@@ -4,12 +4,17 @@
 
 #define MAX_ORDER 10
 #define NOMINMAX
+#define ESCAPE 27
 
 #include <string>
 #include <iostream>
 #include <Windows.h>
+#include <conio.h>
 #include <iomanip> // Для использования setw
 using namespace std;
+
+extern bool StoreCreated;
+extern bool OrderCreated;
 
 // Функция для ввода информации о магазине
 Store inputStore();
@@ -43,3 +48,5 @@ void inputCustomer(string* firstName, string* lastName, float* money, string* ad
 
 // Функция для ввода информации о сотруднике магазина
 void inputEmployee(string* firstName, string* lastName, string* position, float* salary);
+
+void editStoreMenu(Store& vinylStore);

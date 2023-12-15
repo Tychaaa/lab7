@@ -53,10 +53,7 @@ int main()
         // Выводим меню действий
         cout << "Главное меню:" << endl;
         cout << "1. Создать магазин пластинок" << endl;
-        cout << "2. Добавить пластинки в магазин" << endl;
-        cout << "3. Добавить сотрудников в магазин" << endl;
-        cout << "4. Удалить пластинку из ассортимента" << endl;
-        cout << "5. Удалить сотрудника из магазина" << endl;
+        cout << "2. Редактирование магазина" << endl;
         cout << "6. Посмотреть информацию о магазине" << endl;
         cout << "7. Посмотреть информацию о сотрудниках" << endl;
         cout << "8. Посмотреть ассортимент магазина" << endl;
@@ -123,98 +120,8 @@ int main()
 
         // Добавление пластинок в магазин
         case 2:
-            if (StoreCreated) 
-            {
-                do {
-                    try
-                    {
-                        system("cls");
-                        addVinylRecordsToStore(vinylStore);
-                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
-                    }
-                    catch (const std::exception& ex)
-                    {
-                        cout << ex.what() << endl;
-                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
-                    }
-                } while (_getch() != ESCAPE);
-            }
-            else {
-                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
-                Sleep(1500);
-            }
-            break;
-
-        // Добавление сотрудников в магазин
-        case 3:
-            if (StoreCreated)
-            {
-                do {
-                    try
-                    {
-                        system("cls");
-                        addEmployeesToStore(vinylStore);
-                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
-                    }
-                    catch (const std::exception& ex)
-                    {
-                        cout << ex.what() << endl;
-                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
-                    }
-                } while (_getch() != ESCAPE);
-            }
-            else {
-                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
-                Sleep(1500);
-            }
-            break;
-
-        // Удаление пластинки из ассортимента магазина
-        case 4:
-            if (StoreCreated)
-            {
-                do {
-                    try
-                    {
-                        system("cls");
-                        removeVinylRecord(vinylStore);
-                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
-                    }
-                    catch (const std::exception& ex)
-                    {
-                        cout << ex.what() << endl;
-                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
-                    }
-                } while (_getch() != ESCAPE);
-            }
-            else {
-                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
-                Sleep(1500);
-            }
-            break;
-
-        // Удаление сотрудника из магазина
-        case 5:
-            if (StoreCreated)
-            {
-                do {
-                    try
-                    {
-                        system("cls");
-                        removeEmployee(vinylStore);
-                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
-                    }
-                    catch (const std::exception& ex)
-                    {
-                        cout << ex.what() << endl;
-                        cout << "Чтобы продолжить нажмите 'Esc'" << endl;
-                    }
-                } while (_getch() != ESCAPE);
-            }
-            else {
-                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
-                Sleep(1500);
-            }
+            // Переходим в меню редактирования магазина
+            editStoreMenu(vinylStore);
             break;
 
         // Просмотр информации о магазине
