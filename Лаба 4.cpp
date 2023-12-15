@@ -18,6 +18,7 @@
 #include "Employee.h"
 #include "Store.h"
 #include "Order.h"
+#include "OnlineStore.h"
 
 using namespace std;
 
@@ -36,6 +37,7 @@ int main()
 
     Store vinylStore;
     Order* ordersArray = nullptr;
+    OnlineStore ostore;
 
     // Двумерный массив для хранения информации о виниловых пластинках и их итоговой стоимости
     string vinylInfo[MAX_ORDER][3];
@@ -54,12 +56,8 @@ int main()
         cout << "Главное меню:" << endl;
         cout << "1. Создать магазин пластинок" << endl;
         cout << "2. Редактирование магазина" << endl;
-        cout << "6. Посмотреть информацию о магазине" << endl;
-        cout << "7. Посмотреть информацию о сотрудниках" << endl;
-        cout << "8. Посмотреть ассортимент магазина" << endl;
-        cout << "9. Создать заказ" << endl;
-        cout << "10. Посмотреть информацию о заказе" << endl;
-        cout << "11. Посмотреть информацию о заказанных пластинках" << endl;
+        cout << "3. Вывод информации" << endl;
+        cout << "4. Создать заказ" << endl;
         cout << "0. Выход из программы" << endl;
 
         cout << "\nВыберите действие: ";
@@ -125,55 +123,13 @@ int main()
             break;
 
         // Просмотр информации о магазине
-        case 6:
-            if (StoreCreated)
-            {
-                do {
-                    system("cls");
-                    vinylStore.outputStore();
-                    cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
-                } while (_getch() != ESCAPE);
-            }
-            else {
-                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
-                Sleep(1500);
-            }
-            break;
-
-        // Просмотр информации о сотрудниках магазина
-        case 7:
-            if (StoreCreated)
-            {
-                do {
-                    system("cls");
-                    vinylStore.outputEmployees();
-                    cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
-                } while (_getch() != ESCAPE);
-            }
-            else {
-                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
-                Sleep(1500);
-            }
-            break;
-
-        // Просмотр ассортимента магазина
-        case 8:
-            if (StoreCreated)
-            {
-                do {
-                    system("cls");
-                    vinylStore.outputVinylRecords();
-                    cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
-                } while (_getch() != ESCAPE);
-            }
-            else {
-                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
-                Sleep(1500);
-            }
+        case 3:
+            // Переходим в меню вывода информации
+            outputInformationMenu(vinylStore, ordersArray, vinylInfo);
             break;
 
         // Создание заказа
-        case 9:
+        case 4:
             if (StoreCreated)
             {
                 do {
@@ -197,36 +153,11 @@ int main()
             }
             break;
 
-        // Просмотр информации о заказе
-        case 10:
-            if (StoreCreated && OrderCreated)
-            {
-                do {
-                    system("cls");
-                    outputOrders(ordersArray);
-                    cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
-                } while (_getch() != ESCAPE);
-            }
-            else {
-                cout << "\nНи одного заказа не найдено!" << endl;
-                Sleep(1500);
-            }
-            break;
-
-        // Просмотр информации о заказанных пластинках
-        case 11:
-            if (StoreCreated && OrderCreated)
-            {
-                do {
-                    system("cls");
-                    outputVinylInfo(vinylInfo);
-                    cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
-                } while (_getch() != ESCAPE);
-            }
-            else {
-                cout << "\nНи одного заказа не найдено!" << endl;
-                Sleep(1500);
-            }
+        case 5:
+            ostore = vinylStore;
+            //ostore.outputStore();
+            cout << ostore << endl;
+            _getch() != ESCAPE;
             break;
 
         // Выход из программы

@@ -5,10 +5,13 @@
 #include <random>
 using namespace std;
 
+extern int numRecords;
+
 class OnlineStore :
     public Store
 {
 private:
+
     string website;
     string store_email;
     string store_phone;
@@ -28,14 +31,20 @@ public:
     // Метод для вывода информации о магазине
     void outputStore() override;
 
+    // Перегрузка оператора << для вывода информации об онлайн-магазине
+    friend ostream& operator<<(ostream& os, OnlineStore& onlineStore);
+
     // Метод для генерации случайного количества пользователей онлайн
     int generateRandomUsersCount();
+
+    // Перегрузка оператора присваивания объекту производного класса объектов базового класса
+    OnlineStore& operator=(Store& other);
 
     // Сеттеры для класса
     void setWebsite(string newWebsite);
     void setStoreEmail(string newStoreEmail);
     void setStorePhone(string newStorePhone);
-    void setOnlineUsersCount(int count);
+    void setOnlineUsersCount();
     void setSupportedPaymentMethods(vector<string>& methods);
 
     // Геттеры для класса

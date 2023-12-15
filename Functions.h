@@ -49,4 +49,8 @@ void inputCustomer(string* firstName, string* lastName, float* money, string* ad
 // Функция для ввода информации о сотруднике магазина
 void inputEmployee(string* firstName, string* lastName, string* position, float* salary);
 
+// Меню радактирования магазина
 void editStoreMenu(Store& vinylStore);
+
+// Меню вывода информации
+void outputInformationMenu(Store& vinylStore, Order* ordersArray, string vinylInfo[][3]);

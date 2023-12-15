@@ -18,19 +18,23 @@ OnlineStore::~OnlineStore() {}
 // Определение метода для вывода информации о Интернет-магазине
 void OnlineStore::outputStore()
 {
-    Store::outputStore(); // Вызываем метод базового класса
+    setOnlineUsersCount();
 
     // Выводим дополнительную информацию об онлайн-магазине
     cout << "\n\t~~Информация об онлайн-магазине~~" << endl;
+    cout << "-------------------------------------------" << endl;
+    cout << "Название магазина: " << storeName << endl;
+    cout << "Адрес магазина: " << storeAddress << endl;
     cout << "Сайт магазина: " << website << endl;
     cout << "Email магазина: " << store_email << endl;
     cout << "Телефон магазина: " << store_phone << endl;
+    outputVinylRecordsShortList();
     cout << "Количество человек онлайн: " << onlineUsersCount << endl;
-
     cout << "Поддерживаемые методы оплаты: ";
     for (const auto& method : supportedPaymentMethods) {
         cout << method << ", ";
     }
+    cout << "-------------------------------------------" << endl;
     cout << endl;
 }
 
@@ -46,6 +50,19 @@ int OnlineStore::generateRandomUsersCount()
     onlineUsers = dist(gen);
     
     return onlineUsers;
+}
+
+// Перегрузка оператора присваивания объекту производного класса объектов базового класса
+OnlineStore& OnlineStore::operator=(Store& other)
+{
+    if (this != &other) {
+        // Копируем общие данные
+        setStoreName(other.getStoreName());
+        setStoreAddress(other.getStoreAddress());
+        setVinylRecordsInStore(other.getVinylRecordsInStore());
+        setEmployeesInStore(other.getEmployeesInStore());
+    }
+    return *this;
 }
 
 // Метод для установки названия вебсайта
@@ -67,7 +84,7 @@ void OnlineStore::setStorePhone(string newStorePhone)
 }
 
 // Метод для установки количества человек онлайн
-void OnlineStore::setOnlineUsersCount(int count)
+void OnlineStore::setOnlineUsersCount()
 {
     onlineUsersCount = generateRandomUsersCount();
 }
@@ -106,4 +123,41 @@ const int OnlineStore::getOnlineUsersCount()
 const vector<string>& OnlineStore::getSupportedPaymentMethods()
 {
     return supportedPaymentMethods;
+}
+
+// Перегрузка оператора << для вывода информации об онлайн-магазине
+ostream& operator<<(ostream& os, OnlineStore& onlineStore)
+{
+    onlineStore.setOnlineUsersCount();
+
+    // Выводим дополнительную информацию об онлайн-магазине
+    os << "\n\t~~Информация об онлайн-магазине~~" << endl;
+    os << "-------------------------------------------" << endl;
+    os << "Название магазина: " << onlineStore.getStoreName() << endl;
+    os << "Адрес магазина: " << onlineStore.getStoreAddress() << endl;
+    os << "Сайт магазина: " << onlineStore.website << endl;
+    os << "Email магазина: " << onlineStore.store_email << endl;
+    os << "Телефон магазина: " << onlineStore.store_phone << endl;
+
+    // Вывод информации о виниловых пластинках
+    os << "Пластинки в наличии:" << endl;
+    int recordNumber = 1;
+    VinylRecord* recordsBegin = onlineStore.getVinylRecordsInStore();
+    VinylRecord* recordsEnd = recordsBegin + numRecords;
+    for (VinylRecord* record = recordsBegin; record != recordsEnd; ++record) {
+        if (record->getAlbumName() != "") {
+            os << recordNumber << ") " << record->getAlbumName() << " - " << record->getArtist() << " (" << record->getQuantity() << " шт.)" << endl;
+            recordNumber++;
+        }
+    }
+
+    os << "Количество человек онлайн: " << onlineStore.onlineUsersCount << endl;
+    os << "Поддерживаемые методы оплаты: ";
+    for (const auto& method : onlineStore.supportedPaymentMethods) {
+        os << method << ", ";
+    }
+    os << "\n-------------------------------------------" << endl;
+    os << endl;
+
+    return os;
 }

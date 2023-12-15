@@ -16,10 +16,13 @@ extern int numRecords, numEmployees;
 class Store {
 private:
 
-    string storeName;    // Название магазина
-    string storeAddress; // Адрес магазина
     VinylRecord vinylRecordsInStore[MAX_RECORDS]; // Список имеющихся в магазине виниловых пластинок
     Employee employeesInStore[MAX_EMPLOYEE];      // Список сотрудников магазина
+
+protected:
+
+    string storeName;    // Название магазина
+    string storeAddress; // Адрес магазина
 
 public:
 

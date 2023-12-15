@@ -610,20 +610,20 @@ void editStoreMenu(Store& vinylStore) {
         cout << endl;
 
         // Выводим меню редактирования магазина
-        std::cout << "Меню редактирования магазина:" << std::endl;
-        std::cout << "1. Добавить пластинки в магазин" << std::endl;
-        std::cout << "2. Добавить сотрудников в магазин" << std::endl;
-        std::cout << "3. Удалить пластинку из ассортимента" << std::endl;
-        std::cout << "4. Удалить сотрудника из магазина" << std::endl;
-        std::cout << "0. Вернуться в главное меню" << std::endl;
-        std::cout << "\nВыберите действие: ";
+        cout << "Меню редактирования магазина:" << endl;
+        cout << "1. Добавить пластинки в магазин" << endl;
+        cout << "2. Добавить сотрудников в магазин" << endl;
+        cout << "3. Удалить пластинку из ассортимента" << endl;
+        cout << "4. Удалить сотрудника из магазина" << endl;
+        cout << "0. Вернуться в главное меню" << endl;
+        cout << "\nВыберите действие: ";
 
-        while (!(std::cin >> input)) {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Некорректный ввод! Выберите действие: ";
+        while (!(cin >> input)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Некорректный ввод! Выберите действие: ";
         }
-        std::cin.ignore();
+        cin.ignore();
 
         switch (input) {
         case 1:
@@ -721,7 +721,118 @@ void editStoreMenu(Store& vinylStore) {
         case 0:
             return; // Возвращаемся в главное меню
         default:
-            std::cout << "Некорректный выбор!" << std::endl;
+            cout << "Некорректный выбор!" << std::endl;
+        }
+    } while (true);
+}
+
+// Меню вывода информации
+void outputInformationMenu(Store& vinylStore, Order* ordersArray, string vinylInfo[][3]) {
+    int input;
+    do {
+        system("cls"); // Очистка экрана
+
+        // Выводим заголовок программы
+        cout << "\t~~Лабораторная работа №5~~" << endl;
+        cout << endl;
+
+        // Выводим меню вывода информации
+        cout << "Меню вывода информации:" << endl;
+        cout << "1. Посмотреть информацию о магазине" << endl;
+        cout << "2. Посмотреть информацию о сотрудниках" << endl;
+        cout << "3. Посмотреть ассортимент магазина" << endl;
+        cout << "4. Посмотреть информацию о заказе" << endl;
+        cout << "5. Посмотреть информацию о заказанных пластинках" << endl;
+        cout << "0. Вернуться в главное меню" << endl;
+        cout << "\nВыберите действие: ";
+
+        while (!(cin >> input)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Некорректный ввод! Выберите действие: ";
+        }
+        cin.ignore();
+
+        switch (input) {
+        case 1:
+            // Вывод информации о магазине
+            if (StoreCreated)
+            {
+                do {
+                    system("cls");
+                    vinylStore.outputStore();
+                    cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
+                Sleep(1500);
+            }
+            break;
+        case 2:
+            // Вывод информации о сотрудниках
+            if (StoreCreated)
+            {
+                do {
+                    system("cls");
+                    vinylStore.outputEmployees();
+                    cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
+                Sleep(1500);
+            }
+            break;
+        case 3:
+            // Вывод ассортимента магазина
+            if (StoreCreated)
+            {
+                do {
+                    system("cls");
+                    vinylStore.outputVinylRecords();
+                    cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
+                Sleep(1500);
+            }
+            break;
+        case 4:
+            // Вывод информации о заказе
+            if (StoreCreated && OrderCreated)
+            {
+                do {
+                    system("cls");
+                    outputOrders(ordersArray);
+                    cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nНи одного заказа не найдено!" << endl;
+                Sleep(1500);
+            }
+            break;
+        case 5:
+            // Вывод информации о заказанных пластинках
+            if (StoreCreated && OrderCreated)
+            {
+                do {
+                    system("cls");
+                    outputVinylInfo(vinylInfo);
+                    cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nНи одного заказа не найдено!" << endl;
+                Sleep(1500);
+            }
+            break;
+        case 0:
+            return; // Возвращаемся в главное меню
+        default:
+            cout << "Некорректный выбор!" << endl;
         }
     } while (true);
 }
