@@ -99,10 +99,12 @@ int main()
 
                         // Обработка ответа пользователя
                         if (response == 'y' || response == 'Y') {
+                            cin.ignore();
                             system("cls");
                             vinylStore = inputStore();
                             // Сбросить флаг создания заказа
                             OrderCreated = false;
+                            OnlineStoreCreated = false;
                         }
                         else {
                             cout << "Магазин не будет пересоздан." << endl;
@@ -123,10 +125,31 @@ int main()
             do {
                 system("cls");
 
-                if (StoreCreated)
+                if (StoreCreated && !OnlineStoreCreated)
                 {
                     onlineStore = inputOnlineStore(vinylStore);
                     OnlineStoreCreated = true;
+                }
+                else if (OnlineStoreCreated)
+                {
+                    // Предупреждение при попытке создать новый магазин при уже существующем
+                    cout << "\n\t\t~~ПРЕДУПРЕЖДЕНИЕ~~" << endl;
+                    cout << "-------------------------------------------" << endl;
+                    cout << "Онлайн-магазин уже создан. Хотите создать новый магазин?" << endl;
+                    cout << "Введите ответ (y/n): ";
+                    char response;
+                    cin >> response;
+                    cout << "-------------------------------------------" << endl;
+
+                    // Обработка ответа пользователя
+                    if (response == 'y' || response == 'Y') {
+                        system("cls");
+                        onlineStore = inputOnlineStore(vinylStore);
+                    }
+                    else {
+                        cout << "Магазин не будет пересоздан." << endl;
+                        cout << "-------------------------------------------\n" << endl;
+                    }
                 }
                 else {
                     cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;

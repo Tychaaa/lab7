@@ -28,7 +28,15 @@ void OnlineStore::outputStore()
     cout << "Сайт магазина: " << website << endl;
     cout << "Email магазина: " << store_email << endl;
     cout << "Телефон магазина: " << store_phone << endl;
-    outputVinylRecordsShortList();
+    int recordNumber = 1;
+    VinylRecord* recordsBegin = getVinylRecordsInStore();
+    VinylRecord* recordsEnd = recordsBegin + numRecords;
+    for (VinylRecord* record = recordsBegin; record != recordsEnd; ++record) {
+        if (record->getAlbumName() != "") {
+            cout << recordNumber << ") " << record->getAlbumName() << " - " << record->getArtist() << " (" << record->getQuantity() << " шт.)" << endl;
+            recordNumber++;
+        }
+    }
     cout << "Количество человек онлайн: " << onlineUsersCount << endl;
     cout << "Поддерживаемые методы оплаты:" << endl;
     for (size_t i = 0; i < supportedPaymentMethods.size(); ++i) {
