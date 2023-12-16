@@ -1,6 +1,7 @@
 #pragma once
 #include "Store.h"
 #include "Order.h"
+#include "OnlineStore.h"
 
 #define MAX_ORDER 10
 #define NOMINMAX
@@ -14,19 +15,22 @@
 using namespace std;
 
 extern bool StoreCreated;
+extern bool OnlineStoreCreated;
 extern bool OrderCreated;
 
 // Функция для ввода информации о магазине
 Store inputStore();
 
+OnlineStore inputOnlineStore(Store& baseStore);
+
 // Функция для добавления виниловых пластинок в магазин
-void addVinylRecordsToStore(Store& store);
+void addVinylRecordsToStore(Store& store, OnlineStore& onlineStore);
 
 // Функция для добавления сотрудников в магазин
-void addEmployeesToStore(Store& store);
+void addEmployeesToStore(Store& store, OnlineStore& onlineStore);
 
 // Функция для удаления виниловой пластинки из магазина
-void removeVinylRecord(Store& store);
+void removeVinylRecord(Store& store, OnlineStore& onlineStore);
 
 // Функция для удаления сотрудника из магазина
 void removeEmployee(Store& store);
@@ -50,7 +54,7 @@ void inputCustomer(string* firstName, string* lastName, float* money, string* ad
 void inputEmployee(string* firstName, string* lastName, string* position, float* salary);
 
 // Меню радактирования магазина
-void editStoreMenu(Store& vinylStore);
+void editStoreMenu(Store& vinylStore, OnlineStore& onlineStore);
 
 // Меню вывода информации
-void outputInformationMenu(Store& vinylStore, Order* ordersArray, string vinylInfo[][3]);
+void outputInformationMenu(Store& vinylStore, Order* ordersArray, string vinylInfo[][3], OnlineStore& onlineStore);

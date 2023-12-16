@@ -45,6 +45,9 @@ public:
     // Метод для вывода информации о магазине
     virtual void outputStore();
 
+    // Перегрузка оператора << для вывода информации о магазине
+    friend ostream& operator<<(ostream& os, Store& store);
+
     // Сеттеры для класса
     void setStoreName(string storeName);
     void setStoreAddress(string storeAddress);

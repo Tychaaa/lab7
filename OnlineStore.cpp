@@ -30,9 +30,9 @@ void OnlineStore::outputStore()
     cout << "Телефон магазина: " << store_phone << endl;
     outputVinylRecordsShortList();
     cout << "Количество человек онлайн: " << onlineUsersCount << endl;
-    cout << "Поддерживаемые методы оплаты: ";
-    for (const auto& method : supportedPaymentMethods) {
-        cout << method << ", ";
+    cout << "Поддерживаемые методы оплаты:" << endl;
+    for (size_t i = 0; i < supportedPaymentMethods.size(); ++i) {
+        cout << i + 1 << ") " << supportedPaymentMethods[i] << endl;
     }
     cout << "-------------------------------------------" << endl;
     cout << endl;
@@ -152,12 +152,11 @@ ostream& operator<<(ostream& os, OnlineStore& onlineStore)
     }
 
     os << "Количество человек онлайн: " << onlineStore.onlineUsersCount << endl;
-    os << "Поддерживаемые методы оплаты: ";
-    for (const auto& method : onlineStore.supportedPaymentMethods) {
-        os << method << ", ";
+    os << "Поддерживаемые методы оплаты:" << endl;
+    for (size_t i = 0; i < onlineStore.supportedPaymentMethods.size(); ++i) {
+        os << i + 1 << ") " << onlineStore.supportedPaymentMethods[i] << endl;
     }
-    os << "\n-------------------------------------------" << endl;
-    os << endl;
+    os << "-------------------------------------------" << endl;
 
     return os;
 }

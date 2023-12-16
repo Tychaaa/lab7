@@ -27,17 +27,18 @@ int numRecords, numEmployees, numOrders;
 
 // Глобальные флаги для проверки создания магазина и заказов
 bool StoreCreated = false;
+bool OnlineStoreCreated = false;
 bool OrderCreated = false;
 
 int main()
 {
     // Ставим русский язык в консоль
     SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);    
+    SetConsoleOutputCP(1251);
 
     Store vinylStore;
     Order* ordersArray = nullptr;
-    OnlineStore ostore;
+    OnlineStore onlineStore;
 
     // Двумерный массив для хранения информации о виниловых пластинках и их итоговой стоимости
     string vinylInfo[MAX_ORDER][3];
@@ -49,15 +50,16 @@ int main()
         system("cls");
 
         // Выводим заголовок программы
-        cout << "\t~~Лабораторная работа №5~~" << endl;
+        cout << "\t~~Лабораторная работа №6~~" << endl;
         cout << endl;
 
         // Выводим меню действий
         cout << "Главное меню:" << endl;
         cout << "1. Создать магазин пластинок" << endl;
-        cout << "2. Редактирование магазина" << endl;
-        cout << "3. Вывод информации" << endl;
-        cout << "4. Создать заказ" << endl;
+        cout << "2. Создать Интернет-магазин пластинок" << endl;
+        cout << "3. Меню \"Редактирование магазина\"" << endl;
+        cout << "4. Меню \"Вывод информации\"" << endl;
+        cout << "5. Создать заказ" << endl;
         cout << "0. Выход из программы" << endl;
 
         cout << "\nВыберите действие: ";
@@ -72,7 +74,7 @@ int main()
 
         // Обработка введенного действи
         switch (input) {
-            
+
         // Создание магазина пластинок
         case 1:
             do {
@@ -116,20 +118,37 @@ int main()
             } while (_getch() != ESCAPE);
             break;
 
-        // Добавление пластинок в магазин
+        // Создание Интернет-магазина пластинок
         case 2:
-            // Переходим в меню редактирования магазина
-            editStoreMenu(vinylStore);
+            do {
+                system("cls");
+
+                if (StoreCreated)
+                {
+                    onlineStore = inputOnlineStore(vinylStore);
+                    OnlineStoreCreated = true;
+                }
+                else {
+                    cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
+                    Sleep(1500);
+                }
+
+                cout << "\nЧтобы продолжить нажмите 'Esc'" << endl;
+            } while (_getch() != ESCAPE);
             break;
 
-        // Просмотр информации о магазине
+        // Переходим в меню редактирования магазина
         case 3:
-            // Переходим в меню вывода информации
-            outputInformationMenu(vinylStore, ordersArray, vinylInfo);
+            editStoreMenu(vinylStore, onlineStore);
+            break;
+
+        // Переходим в меню вывода информации
+        case 4:
+            outputInformationMenu(vinylStore, ordersArray, vinylInfo, onlineStore);
             break;
 
         // Создание заказа
-        case 4:
+        case 5:
             if (StoreCreated)
             {
                 do {
@@ -153,21 +172,14 @@ int main()
             }
             break;
 
-        case 5:
-            ostore = vinylStore;
-            //ostore.outputStore();
-            cout << ostore << endl;
-            _getch() != ESCAPE;
-            break;
-
-        // Выход из программы
+            // Выход из программы
         case 0:
             cout << "\n\t--------------" << endl;
             cout << "\t До свидания!" << endl;
             cout << "\t--------------" << endl;
             break;
 
-        // Обработка некорректного ввода
+            // Обработка некорректного ввода
         default:
             cout << "\nНекорректный выбор!\n" << endl;
             Sleep(1000);

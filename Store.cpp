@@ -86,6 +86,42 @@ void Store::outputVinylRecordsShortList()
     }
 }
 
+// Перегрузка оператора << для вывода информации об онлайн-магазине
+ostream& operator<<(ostream& os, Store& store)
+{
+    os << "\n\t~~Информация о магазине~~" << endl;
+    os << "-------------------------------------------" << endl;
+    os << "Название магазина: " << store.getStoreName() << endl;
+    os << "Адрес магазина: " << store.getStoreAddress() << endl;
+
+    // Вывод информации о виниловых пластинках
+    os << "Пластинки в наличии:" << endl;
+    int recordNumber = 1;
+    VinylRecord* recordsBegin = store.getVinylRecordsInStore();
+    VinylRecord* recordsEnd = recordsBegin + numRecords;
+    for (VinylRecord* record = recordsBegin; record != recordsEnd; ++record) {
+        if (record->getAlbumName() != "") {
+            os << recordNumber << ") " << record->getAlbumName() << " - " << record->getArtist() << " (" << record->getQuantity() << " шт.)" << endl;
+            recordNumber++;
+        }
+    }
+
+    // Вывод информации о сотрудниках
+    os << "Сотрудники магазина:" << endl;
+    int employeeNumber = 1;
+    Employee* employeesBegin = store.getEmployeesInStore();
+    Employee* employeesEnd = employeesBegin + numEmployees;
+    for (Employee* employee = employeesBegin; employee != employeesEnd; ++employee) {
+        if (employee->getFirstName() != "") {
+            os << employeeNumber << ") " << employee->getFirstName() << " " << employee->getLastName() << " - " << employee->getPosition() << endl;
+            employeeNumber++;
+        }
+    }
+
+    os << "-------------------------------------------" << endl;
+    return os;
+}
+
 // Определение метода для вывода информации о магазине
 void Store::outputStore()
 {

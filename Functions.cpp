@@ -96,8 +96,49 @@ Store inputStore()
     return store;
 }
 
+OnlineStore inputOnlineStore(Store& baseStore)
+{
+    cout << "\n\t~~Создание интернет-магазина~~" << endl;
+    cout << "-------------------------------------------" << endl;
+
+    // Ввод дополнительных данных для интернет-магазина
+    string website, storeEmail, storePhone;
+    vector<string> supportedPaymentMethods;
+
+    cout << "Введите веб-сайт интернет-магазина: ";
+    getline(cin, website);
+
+    cout << "Введите email интернет-магазина: ";
+    getline(cin, storeEmail);
+
+    cout << "Введите телефон интернет-магазина: ";
+    getline(cin, storePhone);
+
+    // Ввод поддерживаемых методов оплаты
+    cout << "Введите поддерживаемые методы оплаты (введите 'end' для завершения):" << endl;
+    string paymentMethod;
+    while (true) {
+        cout << "Метод оплаты: ";
+        getline(cin, paymentMethod);
+
+        if (paymentMethod == "end") {
+            break;
+        }
+
+        supportedPaymentMethods.push_back(paymentMethod);
+    }
+
+    // Создаем объект интернет-магазина с использованием конструктора с параметрами
+    OnlineStore onlineStore(baseStore.getStoreName(), baseStore.getStoreAddress(),
+        baseStore.getVinylRecordsInStore(), baseStore.getEmployeesInStore(),
+        supportedPaymentMethods, website, storeEmail, storePhone);
+
+    // Возвращаем созданный объект интернет-магазина
+    return onlineStore;
+}
+
 // Функция для добавления виниловых пластинок в магазин
-void addVinylRecordsToStore(Store& store)
+void addVinylRecordsToStore(Store& store, OnlineStore& onlineStore)
 {
     cout << "\n\t~~Добавление новых пластинок в магазин~~" << endl;
 
@@ -152,12 +193,13 @@ void addVinylRecordsToStore(Store& store)
 
     // Обновляем массив пластинок магазина на новый временный массив
     store.setVinylRecordsInStore(tempRecords);
+    onlineStore.setVinylRecordsInStore(tempRecords);
 
     delete[] tempRecords;
 }
 
 // Функция для добавления сотрудников в магазин
-void addEmployeesToStore(Store& store)
+void addEmployeesToStore(Store& store, OnlineStore& onlineStore)
 {
     cout << "\n\t~~Добавление новых сотрудников в магазин~~" << endl;
 
@@ -211,12 +253,13 @@ void addEmployeesToStore(Store& store)
 
     // Обновляем массив сотрудников магазина на новый временный массив
     store.setEmployeesInStore(tempEmployees);
+    onlineStore.setEmployeesInStore(tempEmployees);
 
     delete[] tempEmployees;
 }
 
 // Функция для удаления виниловой пластинки из магазина
-void removeVinylRecord(Store& store)
+void removeVinylRecord(Store& store, OnlineStore& onlineStore)
 {
     // Создаем исключение по значению
     if (numRecords == 1)
@@ -251,6 +294,7 @@ void removeVinylRecord(Store& store)
 
         // Обновляем массив виниловых пластинок магазина
         store.setVinylRecordsInStore(vinylRecords);
+        onlineStore.setVinylRecordsInStore(vinylRecords);
 
         cout << "Виниловая пластинка успешно удалена!" << endl;
     }
@@ -263,7 +307,7 @@ void removeVinylRecord(Store& store)
 }
 
 // Функция для удаления сотрудника из магазина
-void removeEmployee(Store& store)
+void removeEmployee(Store& store, OnlineStore& onlineStore)
 {
     // Создаем исключение по значению
     if (numEmployees == 1) 
@@ -298,6 +342,7 @@ void removeEmployee(Store& store)
 
         // Обновляем массив сотрудников магазина
         store.setEmployeesInStore(employees);
+        onlineStore.setEmployeesInStore(employees);
 
         cout << "Сотрудник успешно удален!" << endl;
     }
@@ -599,14 +644,14 @@ void inputEmployee(string* firstName, string* lastName, string* position, float*
     }
 }
 
-// Меню радактирования магазина
-void editStoreMenu(Store& vinylStore) {
+// Меню редактирования магазина
+void editStoreMenu(Store& vinylStore, OnlineStore& onlineStore) {
     int input;
     do {
         system("cls"); // Очистка экрана
 
         // Выводим заголовок программы
-        cout << "\t~~Лабораторная работа №5~~" << endl;
+        cout << "\t~~Лабораторная работа №6~~" << endl;
         cout << endl;
 
         // Выводим меню редактирования магазина
@@ -634,7 +679,7 @@ void editStoreMenu(Store& vinylStore) {
                     try
                     {
                         system("cls");
-                        addVinylRecordsToStore(vinylStore);
+                        addVinylRecordsToStore(vinylStore, onlineStore);
                         cout << "Чтобы продолжить нажмите 'Esc'" << endl;
                     }
                     catch (const std::exception& ex)
@@ -657,7 +702,7 @@ void editStoreMenu(Store& vinylStore) {
                     try
                     {
                         system("cls");
-                        addEmployeesToStore(vinylStore);
+                        addEmployeesToStore(vinylStore, onlineStore);
                         cout << "Чтобы продолжить нажмите 'Esc'" << endl;
                     }
                     catch (const std::exception& ex)
@@ -680,7 +725,7 @@ void editStoreMenu(Store& vinylStore) {
                     try
                     {
                         system("cls");
-                        removeVinylRecord(vinylStore);
+                        removeVinylRecord(vinylStore, onlineStore);
                         cout << "Чтобы продолжить нажмите 'Esc'" << endl;
                     }
                     catch (const std::exception& ex)
@@ -703,7 +748,7 @@ void editStoreMenu(Store& vinylStore) {
                     try
                     {
                         system("cls");
-                        removeEmployee(vinylStore);
+                        removeEmployee(vinylStore, onlineStore);
                         cout << "Чтобы продолжить нажмите 'Esc'" << endl;
                     }
                     catch (const std::exception& ex)
@@ -727,22 +772,25 @@ void editStoreMenu(Store& vinylStore) {
 }
 
 // Меню вывода информации
-void outputInformationMenu(Store& vinylStore, Order* ordersArray, string vinylInfo[][3]) {
+void outputInformationMenu(Store& vinylStore, Order* ordersArray, string vinylInfo[][3], OnlineStore& onlineStore) {
     int input;
     do {
         system("cls"); // Очистка экрана
 
         // Выводим заголовок программы
-        cout << "\t~~Лабораторная работа №5~~" << endl;
+        cout << "\t~~Лабораторная работа №6~~" << endl;
         cout << endl;
 
         // Выводим меню вывода информации
         cout << "Меню вывода информации:" << endl;
-        cout << "1. Посмотреть информацию о магазине" << endl;
-        cout << "2. Посмотреть информацию о сотрудниках" << endl;
-        cout << "3. Посмотреть ассортимент магазина" << endl;
-        cout << "4. Посмотреть информацию о заказе" << endl;
-        cout << "5. Посмотреть информацию о заказанных пластинках" << endl;
+        cout << "1. Посмотреть информацию о магазине (метод Display)" << endl;
+        cout << "2. Посмотреть информацию о магазине (операция <<)" << endl;
+        cout << "3. Посмотреть информацию о Интернет-магазине (метод Display)" << endl;
+        cout << "4. Посмотреть информацию о Интернет-магазине (операция <<)" << endl;
+        cout << "5. Посмотреть информацию о сотрудниках" << endl;
+        cout << "6. Посмотреть ассортимент магазина" << endl;
+        cout << "7. Посмотреть информацию о заказе" << endl;
+        cout << "8. Посмотреть информацию о заказанных пластинках" << endl;
         cout << "0. Вернуться в главное меню" << endl;
         cout << "\nВыберите действие: ";
 
@@ -755,7 +803,7 @@ void outputInformationMenu(Store& vinylStore, Order* ordersArray, string vinylIn
 
         switch (input) {
         case 1:
-            // Вывод информации о магазине
+            // Вывод информации о магазине (метод Display)
             if (StoreCreated)
             {
                 do {
@@ -770,6 +818,51 @@ void outputInformationMenu(Store& vinylStore, Order* ordersArray, string vinylIn
             }
             break;
         case 2:
+            // Вывод информации о магазине (операция <<)
+            if (StoreCreated)
+            {
+                do {
+                    system("cls");
+                    cout << vinylStore << endl; // Заменить метод Display используя операции <<
+                    cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
+                Sleep(1500);
+            }
+            break;
+        case 3:
+            // Вывод информации о Интернет-магазине (метод Display)
+            if (OnlineStoreCreated)
+            {
+                do {
+                    system("cls");
+                    onlineStore.outputStore();
+                    cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
+                Sleep(1500);
+            }
+            break;
+        case 4:
+            // Вывод информации о Интернет-магазине (операция <<)
+            if (OnlineStoreCreated)
+            {
+                do {
+                    system("cls");
+                    cout << onlineStore << endl; // Заменить метод Display используя операции <<
+                    cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nПрежде чем воспользоваться этой функцией, создайте магазин!" << endl;
+                Sleep(1500);
+            }
+            break;
+        case 5:
             // Вывод информации о сотрудниках
             if (StoreCreated)
             {
@@ -784,7 +877,7 @@ void outputInformationMenu(Store& vinylStore, Order* ordersArray, string vinylIn
                 Sleep(1500);
             }
             break;
-        case 3:
+        case 6:
             // Вывод ассортимента магазина
             if (StoreCreated)
             {
@@ -799,7 +892,7 @@ void outputInformationMenu(Store& vinylStore, Order* ordersArray, string vinylIn
                 Sleep(1500);
             }
             break;
-        case 4:
+        case 7:
             // Вывод информации о заказе
             if (StoreCreated && OrderCreated)
             {
@@ -814,7 +907,7 @@ void outputInformationMenu(Store& vinylStore, Order* ordersArray, string vinylIn
                 Sleep(1500);
             }
             break;
-        case 5:
+        case 8:
             // Вывод информации о заказанных пластинках
             if (StoreCreated && OrderCreated)
             {

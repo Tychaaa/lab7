@@ -5,7 +5,8 @@
 #include <random>
 using namespace std;
 
-extern int numRecords;
+// Глобальные переменные для подсчета количества пластинок и сотрудников
+extern int numRecords, numEmployees;
 
 class OnlineStore :
     public Store
