@@ -19,6 +19,7 @@
 #include "Store.h"
 #include "Order.h"
 #include "OnlineStore.h"
+#include "StoreItem.h"
 
 using namespace std;
 
@@ -60,6 +61,8 @@ int main()
         cout << "3. Меню \"Редактирование магазина\"" << endl;
         cout << "4. Меню \"Вывод информации\"" << endl;
         cout << "5. Создать заказ" << endl;
+        cout << "6. Демонстрация использования виртуальных функций " << endl;
+        cout << "7. Демонстрация использования шаблона класса" << endl;
         cout << "0. Выход из программы" << endl;
 
         cout << "\nВыберите действие: ";
@@ -195,7 +198,67 @@ int main()
             }
             break;
 
-            // Выход из программы
+        // Демонстрация использования виртуальных функций
+        case 6:
+
+            do {
+                system("cls");
+
+                cout << "\n\t~~Демонстрация использования виртуальных функций~~\n" << endl;
+
+                // Создаем объекты
+                Store myStore("My Store", "с.Barnaul", nullptr, nullptr);
+                OnlineStore myOnlineStore("My Online Store", "v.Romanovo", nullptr, nullptr, { "Credit Card", "Yandex.Money" }, "www.mystore.com", "info@mystore.com", "+7-961-999-54-73");
+
+                // Вызываем виртуальную функцию через указатель на базовый класс
+                cout << "Вызываем виртуальную функцию через указатель на базовый класс\n" << endl;
+
+                Store* ptrStore = &myStore;
+                ptrStore->displayInfo();  // Выведет информацию о магазине
+
+                ptrStore = &myOnlineStore;
+                ptrStore->displayInfo();  // Выведет информацию о Интернет-магазине, так как метод виртуальный
+
+                // Вызываем виртуальную функцию через динамический объект
+                cout << "\nВызываем виртуальную функцию через динамический объект\n" << endl;
+
+                ptrStore = new Store("My another Store", "v.Mamontovo", nullptr, nullptr);
+                ptrStore->displayInfo();  // Выведет информацию о магазине
+
+                ptrStore = new OnlineStore("Another Online Store", "с.Novosibirsk", nullptr, nullptr, { "Money", "Qiwi" }, "www.mystore2.com", "information@mystore.com", "123-456-7890");
+                ptrStore->displayInfo();  // Выведет информацию о Интернет-магазине
+
+                delete ptrStore;
+
+                cout << "\nЧтобы продолжить нажмите 'Esc'" << endl;
+            } while (_getch() != ESCAPE);
+
+            break;
+
+        // Демонстрация использования шаблона класса
+        case 7:
+
+            do {
+                system("cls");
+
+                cout << "\n\t~~Демонстрация использования шаблона класса~~\n" << endl;
+
+                // Пример использования класса StoreItem с разными типами данных
+                StoreItem<string, double> vinylRecord("Classic Vinyl", 1999.90);
+                StoreItem<string, double> cd("Rock CD", 1499.50);
+                StoreItem<string, double> cassette("80s Mixtape", 999.40);
+
+                // Вывод информации о товарах
+                vinylRecord.displayInfo();
+                cd.displayInfo();
+                cassette.displayInfo();
+
+                cout << "\nЧтобы продолжить нажмите 'Esc'" << endl;
+            } while (_getch() != ESCAPE);
+
+            break;
+
+        // Выход из программы
         case 0:
             cout << "\n\t--------------" << endl;
             cout << "\t До свидания!" << endl;

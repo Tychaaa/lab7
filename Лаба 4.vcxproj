@@ -134,6 +134,7 @@
     <ClCompile Include="OnlineStore.cpp" />
     <ClCompile Include="Order.cpp" />
     <ClCompile Include="Store.cpp" />
+    <ClCompile Include="StoreItem.cpp" />
     <ClCompile Include="VinylRecord.cpp" />
     <ClCompile Include="Лаба 4.cpp" />
   </ItemGroup>
@@ -145,6 +146,7 @@
     <ClInclude Include="OnlineStore.h" />
     <ClInclude Include="Order.h" />
     <ClInclude Include="Store.h" />
+    <ClInclude Include="StoreItem.h" />
     <ClInclude Include="VinylRecord.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

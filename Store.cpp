@@ -134,6 +134,12 @@ void Store::outputStore()
     cout << "-------------------------------------------\n" << endl;
 }
 
+// Виртуальная функция для вывода информации о магазине
+void Store::displayInfo()
+{
+    cout << "Магазин: " << storeName << ", Адрес: " << storeAddress << endl;
+}
+
 // Метод для установки названия магазина
 void Store::setStoreName(string storeName)
 {

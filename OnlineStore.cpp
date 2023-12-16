@@ -46,6 +46,12 @@ void OnlineStore::outputStore()
     cout << endl;
 }
 
+// Переопределение виртуальной функции для вывода информации о Интернет-магазине
+void OnlineStore::displayInfo()
+{
+    cout << "Интернет-магазин: " << storeName << ", Адрес: " << storeAddress << ", Сайт магазина: " << website << endl;
+}
+
 // Метод для генерации случайного количества пользователей онлайн
 int OnlineStore::generateRandomUsersCount()
 {

@@ -45,6 +45,9 @@ public:
     // Метод для вывода информации о магазине
     virtual void outputStore();
 
+    // Виртуальная функция для вывода информации о магазине
+    virtual void displayInfo();
+
     // Перегрузка оператора << для вывода информации о магазине
     friend ostream& operator<<(ostream& os, Store& store);
 
@@ -60,4 +63,3 @@ public:
     VinylRecord* getVinylRecordsInStore();    
     Employee* getEmployeesInStore();
 };
-

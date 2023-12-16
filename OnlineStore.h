@@ -32,6 +32,9 @@ public:
     // Метод для вывода информации о магазине
     void outputStore() override;
 
+    // Переопределение виртуальной функции для вывода информации о Интернет-магазине
+    void displayInfo() override;
+
     // Перегрузка оператора << для вывода информации об онлайн-магазине
     friend ostream& operator<<(ostream& os, OnlineStore& onlineStore);
 
@@ -55,4 +58,3 @@ public:
     const int getOnlineUsersCount();
     const vector<string>& getSupportedPaymentMethods();
 };
-
