@@ -522,6 +522,26 @@ void outputOrders(vector<Order>& ordersVector) {
     }
 }
 
+// Функция для сортировки заказов по номеру заказа и возврата нового вектора
+vector<Order> getSortedOrderByOrderNumber(vector<Order>& ordersVector) {
+    vector<Order> sortedOrders = ordersVector;
+    sort(sortedOrders.begin(), sortedOrders.end(), [](Order& a, Order& b) {
+        return a.getOrderNumber() < b.getOrderNumber();
+        });
+    return sortedOrders;
+}
+
+
+// Функция для сортировки заказов по итоговой стоимости и возврата нового вектора
+vector<Order> getSortedOrderByTotalCostDescending(vector<Order>& ordersVector) {
+    vector<Order> sortedOrders = ordersVector;
+    sort(sortedOrders.begin(), sortedOrders.end(), [](Order& a, Order& b) {
+        return a.getTotalCost() > b.getTotalCost();
+        });
+    return sortedOrders;
+}
+
+
 // Дружественная функция для проверки наличия достаточного количества заказанных пластинок в магазине
 bool checkAvailability(VinylRecord& orderedRecord, int orderedQuantity, Store& store) {
     // Получаем список виниловых пластинок в магазине
@@ -789,7 +809,9 @@ void outputInformationMenu(Store& vinylStore, vector<Order>& ordersVector, strin
         cout << "5. Посмотреть информацию о сотрудниках" << endl;
         cout << "6. Посмотреть ассортимент магазина" << endl;
         cout << "7. Посмотреть информацию о заказе" << endl;
-        cout << "8. Посмотреть информацию о заказанных пластинках" << endl;
+        cout << "8. Посмотреть информацию о заказе (сортировка по стоимости)" << endl;
+        cout << "9. Посмотреть информацию о заказе (сортировка по номеру заказа)" << endl;
+        cout << "10. Посмотреть информацию о заказанных пластинках" << endl;
         cout << "0. Вернуться в главное меню" << endl;
         cout << "\nВыберите действие: ";
 
@@ -908,6 +930,42 @@ void outputInformationMenu(Store& vinylStore, vector<Order>& ordersVector, strin
             }
             break;
         case 8:
+            // Вывод информации о заказе (отсортированный по стоимости заказов)
+            if (StoreCreated && OrderCreated)
+            {
+                do {
+                    system("cls");
+                    // Получаем отсортированный список по итоговой стоимости заказа (по убыванию)
+                    vector<Order> sortedOrderByTotalCost = getSortedOrderByTotalCostDescending(ordersVector);
+                    // Вывод отсортированного списка заказов
+                    outputOrders(sortedOrderByTotalCost);
+                    cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nНи одного заказа не найдено!" << endl;
+                Sleep(1500);
+            }
+            break;
+        case 9:
+            // Вывод информации о заказе (отсортированный по номеру заказа)
+            if (StoreCreated && OrderCreated)
+            {
+                do {
+                    system("cls");
+                    // Получаем отсортированный список по номеру заказа
+                    vector<Order> sortedOrderByOrderNumber = getSortedOrderByOrderNumber(ordersVector);
+                    // Вывод отсортированного списка заказов
+                    outputOrders(sortedOrderByOrderNumber);
+                    cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
+                } while (_getch() != ESCAPE);
+            }
+            else {
+                cout << "\nНи одного заказа не найдено!" << endl;
+                Sleep(1500);
+            }
+            break;
+        case 10:
             // Вывод информации о заказанных пластинках
             if (StoreCreated && OrderCreated)
             {

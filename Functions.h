@@ -12,6 +12,7 @@
 #include <Windows.h>
 #include <conio.h>
 #include <vector>
+#include <algorithm> // Для сортировки
 #include <iomanip> // Для использования setw
 using namespace std;
 
@@ -44,6 +45,10 @@ void outputVinylInfo(string vinylInfo[][3]);
 
 // Функция для вывода информации о заказах
 void outputOrders(vector<Order>& ordersVector);
+
+vector<Order> getSortedOrderByOrderNumber(vector<Order>& ordersVector);
+
+vector<Order> getSortedOrderByTotalCostDescending(vector<Order>& ordersVector);
 
 // Функция для ввода информации о виниловой пластинке
 void inputVinylRecord(string& album, string& artist, int& year, string& genre, float& price, int& quantity);
