@@ -354,7 +354,7 @@ void removeEmployee(Store& store, OnlineStore& onlineStore)
 }
 
 // Функция для ввода информации о заказах
-Order* inputOrders(Store store, string vinylInfo[][3])
+vector<Order> inputOrders(Store store, string vinylInfo[][3])
 {
     cout << "\n\t~~Создание заказа~~" << endl;
 
@@ -376,8 +376,8 @@ Order* inputOrders(Store store, string vinylInfo[][3])
 
     cin.ignore();
 
-    // Создание массива для хранения заказов
-    Order* ordersArray = new Order[numOrders];
+    // Создание вектора для хранения заказов
+    vector<Order> ordersVector;
 
     cout << "-------------------------------------------" << endl;
     for (int i = 0; i < numOrders; ++i) {
@@ -484,17 +484,16 @@ Order* inputOrders(Store store, string vinylInfo[][3])
 
         float totalCost = vinylRecords[vinylIndex].getPrice() * quantityOrdered;
 
-        
-
-        ordersArray[i] = Order(orderDate, employees[employeeIndex], Customer(clientFirstName, clientLastName, clientMoney, clientAddress), vinylRecords[vinylIndex], quantityOrdered, totalCost);
+        // Добавление заказа в вектор
+        ordersVector.push_back(Order(orderDate, employees[employeeIndex], Customer(clientFirstName, clientLastName, clientMoney, clientAddress), vinylRecords[vinylIndex], quantityOrdered, totalCost));
 
         // Добавляем информацию о виниловой пластинке и её итоговой стоимости в двумерный массив
-        vinylInfo[i][0] = to_string(ordersArray[i].getOrderNumber()); // Номер заказа
-        vinylInfo[i][1] = vinylRecords[vinylIndex].getAlbumName();    // Название виниловой пластинки
-        vinylInfo[i][2] = to_string(totalCost);                       // Итоговая стоимость
+        vinylInfo[i][0] = to_string(ordersVector[i].getOrderNumber()); // Номер заказа
+        vinylInfo[i][1] = vinylRecords[vinylIndex].getAlbumName();      // Название виниловой пластинки
+        vinylInfo[i][2] = to_string(totalCost);                         // Итоговая стоимость
     }
 
-    return ordersArray;
+    return ordersVector;
 }
 
 // Функция для вывода информации о заказанных пластинках
@@ -511,14 +510,14 @@ void outputVinylInfo(string vinylInfo[][3]) {
     cout << endl;
 }
 
-// Функция для вывода информации о заказах
-void outputOrders(Order* ordersArray) {
+// Обновленная функция для вывода информации о заказах
+void outputOrders(vector<Order>& ordersVector) {
     cout << "\n\t~~Информация о заказах~~" << endl;
     cout << "-------------------------------------------" << endl;
 
-    for (int i = 0; i < numOrders; ++i) {
+    for (size_t i = 0; i < ordersVector.size(); ++i) {
         cout << "Заказ #" << i + 1 << ":" << endl;
-        ordersArray[i].outputOrder();
+        ordersVector[i].outputOrder();
         cout << "-------------------------------------------" << endl;
     }
 }
@@ -772,7 +771,7 @@ void editStoreMenu(Store& vinylStore, OnlineStore& onlineStore) {
 }
 
 // Меню вывода информации
-void outputInformationMenu(Store& vinylStore, Order* ordersArray, string vinylInfo[][3], OnlineStore& onlineStore) {
+void outputInformationMenu(Store& vinylStore, vector<Order>& ordersVector, string vinylInfo[][3], OnlineStore& onlineStore) {
     int input;
     do {
         system("cls"); // Очистка экрана
@@ -898,7 +897,8 @@ void outputInformationMenu(Store& vinylStore, Order* ordersArray, string vinylIn
             {
                 do {
                     system("cls");
-                    outputOrders(ordersArray);
+                    // Заменяем использование массива на вектор
+                    outputOrders(ordersVector);
                     cout << "Чтобы закончить просмотр нажмите 'Esc'" << endl;
                 } while (_getch() != ESCAPE);
             }

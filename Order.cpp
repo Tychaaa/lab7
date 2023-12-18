@@ -1,8 +1,5 @@
 #include "Order.h"
 
-// Инициализируем переменную для номера заказа
-int Order::orderNumberGenerator = Order::generateOrderNumber();
-
 // Контруктор без параметров
 Order::Order() : orderNumber(0), orderDate(""), quantityOrdered(0), totalCost(0) {}
 
@@ -10,7 +7,7 @@ Order::Order() : orderNumber(0), orderDate(""), quantityOrdered(0), totalCost(0)
 Order::Order(string date, Employee emp, Customer cust, VinylRecord record, int quantity, float cost)
     : orderDate(date), employee(emp), customer(cust), orderedRecord(record), quantityOrdered(quantity), totalCost(cost) 
 {
-    orderNumber = orderNumberGenerator++;
+    orderNumber = generateOrderNumber();
 }
 
 // Деструктор
@@ -33,8 +30,11 @@ void Order::outputOrder()
 // Статический метод для генерации уникального номера заказа
 int Order::generateOrderNumber() 
 {
-    srand(static_cast<unsigned int>(time(0)));  // Инициализация генератора случайных чисел
-    return rand() % 10000 + 1;  // Генерация случайного числа от 1 до 10000
+    random_device rd;  // Источник энтропии
+    mt19937 gen(rd()); // Генератор случайных чисел
+    uniform_int_distribution<> dist(1, 1000); // Равномерное распределение от 1 до 1000
+
+    return dist(gen);
 }
 
 // Метод для установки даты заказа

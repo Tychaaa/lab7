@@ -9,6 +9,7 @@
 #include <string>
 #include <conio.h>
 #include <Windows.h>
+#include <vector>
 #include "Functions.h" // Заголовочный файл с функциями
 
 // Заголовочные файлы для классов
@@ -38,7 +39,7 @@ int main()
     SetConsoleOutputCP(1251);
 
     Store vinylStore;
-    Order* ordersArray = nullptr;
+    vector<Order> ordersVector;  // Заменяем указатель на вектор
     OnlineStore onlineStore;
 
     // Двумерный массив для хранения информации о виниловых пластинках и их итоговой стоимости
@@ -170,7 +171,7 @@ int main()
 
         // Переходим в меню вывода информации
         case 4:
-            outputInformationMenu(vinylStore, ordersArray, vinylInfo, onlineStore);
+            outputInformationMenu(vinylStore, ordersVector, vinylInfo, onlineStore);
             break;
 
         // Создание заказа
@@ -181,7 +182,7 @@ int main()
                     try
                     {
                         system("cls");
-                        ordersArray = inputOrders(vinylStore, vinylInfo);
+                        ordersVector = inputOrders(vinylStore, vinylInfo);
                         OrderCreated = true;
                         cout << "Чтобы продолжить нажмите 'Esc'" << endl;
                     }
@@ -271,9 +272,6 @@ int main()
             Sleep(1000);
         }
     } while (input != 0);
-
-    // Освобождение памяти
-    delete[] ordersArray;
 
     return 0;
 }

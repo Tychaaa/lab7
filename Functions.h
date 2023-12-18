@@ -11,6 +11,7 @@
 #include <iostream>
 #include <Windows.h>
 #include <conio.h>
+#include <vector>
 #include <iomanip> // Для использования setw
 using namespace std;
 
@@ -36,13 +37,13 @@ void removeVinylRecord(Store& store, OnlineStore& onlineStore);
 void removeEmployee(Store& store);
 
 // Функция для ввода информации о заказах
-Order* inputOrders(Store store, string vinylInfo[][3]);
+vector<Order> inputOrders(Store store, string vinylInfo[][3]);
 
 // Функция для ввода информации о заказанных пластинках
 void outputVinylInfo(string vinylInfo[][3]);
 
 // Функция для вывода информации о заказах
-void outputOrders(Order* ordersArray);
+void outputOrders(vector<Order>& ordersVector);
 
 // Функция для ввода информации о виниловой пластинке
 void inputVinylRecord(string& album, string& artist, int& year, string& genre, float& price, int& quantity);
@@ -57,4 +58,4 @@ void inputEmployee(string* firstName, string* lastName, string* position, float*
 void editStoreMenu(Store& vinylStore, OnlineStore& onlineStore);
 
 // Меню вывода информации
-void outputInformationMenu(Store& vinylStore, Order* ordersArray, string vinylInfo[][3], OnlineStore& onlineStore);
+void outputInformationMenu(Store& vinylStore, vector<Order>& ordersVector, string vinylInfo[][3], OnlineStore& onlineStore);
