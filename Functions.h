@@ -46,8 +46,10 @@ void outputVinylInfo(string vinylInfo[][3]);
 // Функция для вывода информации о заказах
 void outputOrders(vector<Order>& ordersVector);
 
+// Функция для сортировки заказов по номеру заказа и возврата нового вектора
 vector<Order> getSortedOrderByOrderNumber(vector<Order>& ordersVector);
 
+// Функция для сортировки заказов по итоговой стоимости и возврата нового вектора
 vector<Order> getSortedOrderByTotalCostDescending(vector<Order>& ordersVector);
 
 // Функция для ввода информации о виниловой пластинке

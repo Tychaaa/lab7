@@ -531,7 +531,6 @@ vector<Order> getSortedOrderByOrderNumber(vector<Order>& ordersVector) {
     return sortedOrders;
 }
 
-
 // Функция для сортировки заказов по итоговой стоимости и возврата нового вектора
 vector<Order> getSortedOrderByTotalCostDescending(vector<Order>& ordersVector) {
     vector<Order> sortedOrders = ordersVector;
@@ -540,7 +539,6 @@ vector<Order> getSortedOrderByTotalCostDescending(vector<Order>& ordersVector) {
         });
     return sortedOrders;
 }
-
 
 // Дружественная функция для проверки наличия достаточного количества заказанных пластинок в магазине
 bool checkAvailability(VinylRecord& orderedRecord, int orderedQuantity, Store& store) {
