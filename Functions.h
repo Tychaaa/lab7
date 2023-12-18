@@ -52,6 +52,9 @@ vector<Order> getSortedOrderByOrderNumber(vector<Order>& ordersVector);
 // Функция для сортировки заказов по итоговой стоимости и возврата нового вектора
 vector<Order> getSortedOrderByTotalCostDescending(vector<Order>& ordersVector);
 
+// Функция для поиска заказа по номеру
+void findOrderAndDisplay(vector<Order>& ordersVector);
+
 // Функция для ввода информации о виниловой пластинке
 void inputVinylRecord(string& album, string& artist, int& year, string& genre, float& price, int& quantity);
 

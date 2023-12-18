@@ -540,6 +540,50 @@ vector<Order> getSortedOrderByTotalCostDescending(vector<Order>& ordersVector) {
     return sortedOrders;
 }
 
+// Функция для поиска заказа по номеру
+void findOrderAndDisplay(vector<Order>& ordersVector) 
+{
+    cout << "\n\t~~Поиск заказа по номеру~~" << endl;
+
+    cout << "-------------------------------------------" << endl;
+
+    int orderNumber;
+
+    // Цикл для повторного ввода, пока не будет введено корректное значение
+    while (true) {
+        cout << "Введите номер заказа: ";
+
+        // Проверка на ввод корректного значения
+        if (!(cin >> orderNumber) || orderNumber <= 0) {
+            cin.clear(); // Сброс ошибок ввода
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Очистка буфера
+            cout << "\nОшибка! Введите положительное целое число.\n" << endl;
+        }
+        else {
+            break; // Выход из цикла, если ввод корректен
+        }
+    }
+
+    cout << "-------------------------------------------" << endl;
+
+    // Поиск заказа по номеру
+    auto it = find_if(ordersVector.begin(), ordersVector.end(), [orderNumber](Order& order) {
+        return order.getOrderNumber() == orderNumber;
+        });
+
+    // Вывод результата
+    if (it != ordersVector.end()) {
+        cout << "Найден заказ с номером " << orderNumber << ":\n";
+        cout << "-------------------------------------------" << endl;
+        it->outputOrder();
+    }
+    else {
+        cout << "Заказ с номером " << orderNumber << " не найден.\n";
+    }
+
+    cout << "-------------------------------------------" << endl;
+}
+
 // Дружественная функция для проверки наличия достаточного количества заказанных пластинок в магазине
 bool checkAvailability(VinylRecord& orderedRecord, int orderedQuantity, Store& store) {
     // Получаем список виниловых пластинок в магазине
